@@ -2,7 +2,8 @@ module.exports = {
   "env": {
     "node": true,
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -41,7 +42,7 @@ module.exports = {
     ],
     "import-helpers/order-imports": [
       "warn",
-      { // example configuration
+      { 
         newlinesBetween: "always",
         groups: [
           ["/^react[/a-z]*/"],
@@ -50,7 +51,6 @@ module.exports = {
           ["parent", "sibling", "index"],
           ["/^styles/", "/^types/"]
         ],
-        alphabetize: { order: "asc", ignoreCase: true },
       },
     ],
   }
