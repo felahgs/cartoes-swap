@@ -19,7 +19,8 @@ module.exports = {
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "eslint-plugin-import-helpers"
   ],
   "rules": {
     "indent": [
@@ -37,6 +38,19 @@ module.exports = {
     "semi": [
       "error",
       "always"
-    ]
+    ],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          ["/^react[/a-z]*/"],
+          "module",
+          ["/^pages/", "/^components/"],
+          ["parent", "sibling", "index"],
+          ["/^style/", "/^types/"]
+        ]
+      }
+    ],
   }
 };
