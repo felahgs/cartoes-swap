@@ -41,16 +41,17 @@ module.exports = {
     ],
     "import-helpers/order-imports": [
       "warn",
-      {
-        "newlinesBetween": "always",
-        "groups": [
+      { // example configuration
+        newlinesBetween: "always",
+        groups: [
           ["/^react[/a-z]*/"],
           "module",
           ["/^pages/", "/^components/"],
           ["parent", "sibling", "index"],
-          ["/^style/", "/^types/"]
-        ]
-      }
+          ["/^styles/", "/^types/"]
+        ],
+        alphabetize: { order: "asc", ignoreCase: true },
+      },
     ],
   }
 };
