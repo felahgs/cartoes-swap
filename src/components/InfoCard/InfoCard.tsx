@@ -26,8 +26,8 @@ function InfoCard({title, type, number, client, code, expDate}: T.InfoCardProps)
       </S.InfoContainer>
 
       <S.ActionsContainer>
-        <Icon name="edit" />
-        <Icon name="delete" />
+        <Icon onClick={() => console.log("do something")} name="edit" />
+        <Icon onClick={() => console.log("do something")} name="delete" />
       </S.ActionsContainer>
     </S.InfoCardContainer>
   );

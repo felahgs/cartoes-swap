@@ -4,10 +4,12 @@ import * as S from "./style";
 
 function Navbar() {
   return (
-    <S.NavbarContainer>
-      <img src={logoImg} alt="logo" />
-      <p>My Cards</p>
-    </S.NavbarContainer>
+    <header>
+      <S.NavbarContainer>
+        <img src={logoImg} alt="logo" />
+        <p>My Cards</p>
+      </S.NavbarContainer>
+    </header>
   );
 }
 

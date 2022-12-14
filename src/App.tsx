@@ -4,12 +4,8 @@ import { Navbar } from "components/Navbar";
 const App = () => {
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
-      <main>
-        <Home />
-      </main>
+      <Navbar />
+      <Home />
     </>
   );
 };

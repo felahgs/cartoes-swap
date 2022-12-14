@@ -9,6 +9,7 @@ import visa from "assets/icons/card-visa.svg";
 import masterCard from "assets/icons/card-master.svg";
 
 import * as T from "./types";
+import * as S from "./style";
 
 const iconList = {
   edit: editIcon,
@@ -22,11 +23,11 @@ const iconList = {
   jcb: jcb,
 };
 
-function Icon({name}: T.IconProps) {
+function Icon({name, onClick}: T.IconProps) {
   return (
-    <i title={name}>
+    <S.ClicklabeIcon clickable={!!onClick} title={name} onClick={onClick}>
       <img src={iconList[name]} alt={name} />
-    </i>
+    </S.ClicklabeIcon>
   );
 }
 
