@@ -14,6 +14,8 @@ export const PageContainer = styled.main`
 `;
 
 export const ListContainer = styled.div`
+  padding: 0 16px;
+  
   @media ${devices.desktop} {
     width: 860px;
     margin-bottom: 40px;
