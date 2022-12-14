@@ -1,10 +1,12 @@
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 
+import { FormModal } from "components/Modals";
 import { InfoCard } from "components/InfoCard";
-import {IconNames} from "components/Icon";
+import { IconNames } from "components/Icon";
 
 
-import * as S from "./style";
+import * as S from "./styles";
 
 const cards = [
   {id: 1, type: "visa", title: "Cartão do Uber", number: "1234567898765432", client: "JOHN DOE", code: "123", expDate: "07/2032"},
@@ -18,13 +20,20 @@ const cards = [
 
 
 function Home() {
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const handleShowModal = () => setShowModal(true);
+  const handleHideModal = () => setShowModal(false);
+
   return (
     <S.PageContainer className="Home">
+      <FormModal show={showModal} onClose={handleHideModal} />
       <S.ListContainer>
 
         <S.HeaderContainer>
           <h1>My Cards</h1>
-          <Button>Add new card</Button>
+          <Button onClick={handleShowModal}>Add new card</Button>
         </S.HeaderContainer>
         <S.CardsContainer>
           {

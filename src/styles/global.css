@@ -28,6 +28,8 @@ code {
 .btn-primary {
   background-color: #233876;
   border-color: #233876;
+
+  font-weight: 500;
 }
 
 p {
