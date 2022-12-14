@@ -9,7 +9,7 @@ import visa from "assets/icons/card-visa.svg";
 import masterCard from "assets/icons/card-master.svg";
 
 import * as T from "./types";
-import * as S from "./style";
+import * as S from "./styles";
 
 const iconList = {
   edit: editIcon,

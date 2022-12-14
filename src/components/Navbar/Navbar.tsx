@@ -1,6 +1,6 @@
 import logoImg from "assets/images/logo.svg";
 
-import * as S from "./style";
+import * as S from "./styles";
 
 function Navbar() {
   return (
