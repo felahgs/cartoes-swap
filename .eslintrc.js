@@ -40,18 +40,22 @@ module.exports = {
       "error",
       "always"
     ],
+    "object-curly-spacing": [ "warn", "always" ],
+    "array-bracket-spacing": [ "warn", "always" ], 
+    "computed-property-spacing": [ "warn", "always" ], 
     "import-helpers/order-imports": [
       "warn",
       { 
         newlinesBetween: "always",
         groups: [
-          ["/^react$/", "/^react-use$/"],
-          ["/^react-bootstrap/"],
-          "module",
-          ["/^pages/", "/^components/"],
-          ["/^utils/"],
-          ["parent", "sibling", "index"],
-          ["/^styles/", "/^types/"]
+          [ "/^react$/", "/^react-use$/" ],
+          [ "/^react-bootstrap/" ],
+          [ "module" ],
+          "/services/",
+          [ "/^pages/", "/^components/" ],
+          [ "/^utils/", ],
+          [ "parent", "sibling", "index" ],
+          [ "/^styles/", "/^types/" ]
         ],
         alphabetize: { order: "asc", ignoreCase: true }, // configures imports in alphabetical (ascending) order, ignoring case
 
