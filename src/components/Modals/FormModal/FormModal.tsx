@@ -1,35 +1,37 @@
-// import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
+import { 
+  cardHolder as cardHolderRgx,
+  cardNumber as cardNumberRgx,
+  expDate as expDateRgx,
+  cvc as cvcRgx
+} from "utils/regexValidation";
+import { formatCardNumber, formatExpirationDate, toCamelCase } from "utils/strings";
+
 import * as T from "./types";
 import * as S from "./styles";
 
-// type Inputs = {
-//   cardAlias: string,
-//   cardHolder: string,
-//   cardNumber: string,
-//   expDate: string,
-//   cvc: string,
-// };
-
 function FormModal({show, onClose} :T.FormModalProps) {
-  // const { register, handleSubmit, watch, formState: { errors, isValid, isDirty } } = useForm<Inputs>();
-  // const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
   
-  // console.log(watch("cardAlias")); // watch input value by passing the name of it
-  // console.log(errors);
-  // console.log("has errors", !!errors);
-  
+  const defaultValues = {
+    cardAlias: "",
+    cardHolder: "",
+    cardNumber: "",
+    expDate: "",
+    cvc: "",
+  };
 
+  const [formValue, setFormValue] = useState(defaultValues);
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
+      alert("invalid form");
       event.preventDefault();
       event.stopPropagation();
     }
@@ -38,72 +40,117 @@ function FormModal({show, onClose} :T.FormModalProps) {
     console.log("form event", event);
   };
 
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+
+    setFormValue({...formValue, [toCamelCase(name)]: value});
+  };
+
   return (
     <S.Modal
       show={show}
       onHide={onClose}
-      backdrop="static"
       centered
     >
       <S.ModalHeader closeButton/>
-      {/* </S.ModalHeader> */}
-
       <S.ModalBody >
         <S.ModalTitle>Add new card</S.ModalTitle>
-        <S.Form id="card-form" noValidate validated={validated} onSubmit={handleSubmit}>
-          <S.FormGroup controlid="validationCustom01">
+        <S.Form 
+          id="card-form" 
+          autoComplete="on" 
+          noValidate 
+          validated={validated} 
+          onSubmit={handleSubmit}
+        >
+          <S.FormGroup controlid="card-alias">
             <S.FormLabel>Card Alias*</S.FormLabel>
             <S.Form.Control
               required
+              name="card-alias"
               type="text"
+              value={formValue.cardAlias}
               placeholder="e.g Blackfriday Sales"
-              defaultValue="Mark"
-              // {...register("cardAlias", { required: true })}
+              onChange={handleOnChange}
             />
             <S.Form.Control.Feedback type="invalid">
-              {"It can't be empty!"}
+              {"Card alias is required!"}
             </S.Form.Control.Feedback>
-            {/* <S.Form.Control.Feedback>Looks good!</S.Form.Control.Feedback> */}
           </S.FormGroup>
 
-          <S.FormGroup controlid="validationCustom02">
+          <S.FormGroup controlid="card-holder">
             <S.FormLabel>Card holder*</S.FormLabel>
             <S.Form.Control
               required
+              name="card-holder"
               type="text"
+              pattern={cardHolderRgx}
+              value={formValue.cardHolder}
+              placeholder="Dino S. Sauro"
+              onChange={handleOnChange}
             />
             <S.Form.Control.Feedback type="invalid">
-              {"It can't be empty!"}
+              {formValue.cardHolder.length > 0 ? 
+                "It cannot contain accentuation or special characters!" 
+                : "Card holder is required!"
+              }
             </S.Form.Control.Feedback>
           </S.FormGroup>
 
-          <S.FormGroup controlid="validationCustomUsername">
+          <S.FormGroup controlid="card-number">
             <S.FormLabel>Credit/debit card number*</S.FormLabel>
             <InputGroup hasValidation>
               <S.Form.Control
-                type="text"
+                type="tel"
+                name="card-number"
+                inputMode="numeric"
+                autoComplete="cc-number"
                 required
+                pattern={cardNumberRgx}
+                maxLength={19}
+                value={formatCardNumber(formValue.cardNumber)}
+                placeholder="XXXX XXXX XXXX XXXX"
+                onChange={handleOnChange}
               />
               <S.Form.Control.Feedback type="invalid">
-                {"It can't be empty!"}
+                {"Insert a valid number between 14 and 16 digits!"}
               </S.Form.Control.Feedback>
             </InputGroup>
           </S.FormGroup>
 
           <Row>
-            <S.FormGroup as={Col} md="7" controlid="validationCustom03">
+            <S.FormGroup as={Col} md="7" controlid="exp-date">
               <S.FormLabel>Expiration month and year*</S.FormLabel>
-              <S.Form.Control type="text" required />
+              <S.Form.Control 
+                type="tel" 
+                name="exp-date"
+                inputMode="numeric"
+                required 
+                pattern={expDateRgx}
+                maxLength={5}
+                value={formatExpirationDate(formValue.expDate)}
+                placeholder="MM/YY"
+                onChange={handleOnChange}
+              />
               <S.Form.Control.Feedback type="invalid">
-                {"It can't be empty!"}
+                {"Insert a valid date!"}
               </S.Form.Control.Feedback>
             </S.FormGroup>
 
-            <S.FormGroup as={Col} md="5" controlid="validationCustom04">
+            <S.FormGroup as={Col} md="5" controlid="cvc">
               <S.FormLabel>CVC*</S.FormLabel>
-              <S.Form.Control type="text" required />
+              <S.Form.Control 
+                type="tel" 
+                name="cvc"
+                inputMode="numeric"
+                required 
+                pattern={cvcRgx}
+                maxLength={4}
+                value={formValue.cvc}
+                placeholder="CVC"
+                onChange={handleOnChange}
+              />
               <S.Form.Control.Feedback type="invalid">
-                {"It can't be empty!"}
+                {"Should have ate least 3 characters"}
               </S.Form.Control.Feedback> 
             </S.FormGroup>
           </Row>
@@ -116,7 +163,7 @@ function FormModal({show, onClose} :T.FormModalProps) {
 
       <S.ModalFooter>
         <Button form="card-form" variant="primary" type="submit">Add card</Button>
-        <Button variant="secondary" onClick={onClose}>
+        <Button variant="outline-secondary" onClick={onClose}>
           {"cancel"}
         </Button>
       </S.ModalFooter>

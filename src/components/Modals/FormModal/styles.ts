@@ -4,16 +4,10 @@ import BModal from "react-bootstrap/Modal";
 import styled from "styled-components";
 
 
-export const CardFormContainer = styled.div`
-  
-`;
-
 export const Form = styled(BForm)`
-  /* padding: 0 32px; */
 `;
 
 export const FormGroup = styled(BForm.Group)`
-  /* background-color: blue; */
   margin: 16px 0;
 `;
 
@@ -28,7 +22,11 @@ export const FormLegend = styled.p`
   color: #6B7280;
 `;
 
-export const Modal = styled(BModal)``;
+export const Modal = styled(BModal)`
+  .modal-content {
+    max-width: 416px
+  }
+`;
 
 export const ModalTitle = styled(BModal.Title)`
   color: #111C4E;

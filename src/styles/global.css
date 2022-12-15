@@ -20,7 +20,7 @@ code {
 }
 
 
-/* Customization of bootstrap components */
+/* Cootstrap components customization */
 .btn {
   height: 37px;
 }
@@ -30,6 +30,16 @@ code {
   border-color: #233876;
 
   font-weight: 500;
+}
+
+.form-control:invalid, .invalid-feedback{
+  border-color: #F98080 !important;
+  color: #F98080 !important;
+  background-image: none !important;
+}
+
+input {
+  height: 48px;
 }
 
 p {

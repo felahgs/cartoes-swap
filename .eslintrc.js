@@ -45,7 +45,7 @@ module.exports = {
       { 
         newlinesBetween: "always",
         groups: [
-          ["/^react/"],
+          "/^react/",
           "module",
           ["/^pages/", "/^components/"],
           ["parent", "sibling", "index"],
