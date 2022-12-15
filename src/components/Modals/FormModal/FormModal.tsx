@@ -7,6 +7,8 @@ import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
+import { publicStorages } from "constants/storage";
+import { CardModel } from "models/card.model";
 import { v4 as uuidv4 } from "uuid";
 
 import { api } from "services/binlist";
@@ -25,13 +27,14 @@ import {
   removeWhiteSpaces
 } from "utils/strings";
 
-
 import * as S from "./styles";
 import * as T from "./types";
+
 
 function FormModal({ show, onClose } :T.FormModalProps) {
   
   const defaultValues = {
+    id: "",
     cardAlias: "",
     cardHolder: "",
     cardNumber: "",
@@ -40,7 +43,8 @@ function FormModal({ show, onClose } :T.FormModalProps) {
     scheme: "none",
   };
 
-  const [ cardsStorage, setCardsStorage ] = useLocalStorage<any>("cards", []);
+  const { CARDS } = publicStorages;
+  const [ cardsStorage, setCardsStorage ] = useLocalStorage<CardModel[]>(CARDS, []);
   const [ isTypingCardNumber, setIsTypingCardNumber ] = useState(false);
   const [ formValues, setformValues ] = useState(defaultValues);
   const [ validated, setValidated ] = useState(false);
@@ -65,7 +69,6 @@ function FormModal({ show, onClose } :T.FormModalProps) {
     () => {
       const { cardNumber }  = formValues;
 
-      console.log("regex test", !!cardNumber.match(cardNumberRgx));
       if (cardNumber.match(cardNumberRgx)) {
         fetchSchema();
       }
@@ -74,26 +77,25 @@ function FormModal({ show, onClose } :T.FormModalProps) {
     1500,
     [ formValues.cardNumber ]
   );
+
   const isLoading = cardSchema.loading || isTypingCardNumber;
 
   function saveCard() {
-    const newCard = { id: uuidv4(), ...formValues };
-    setCardsStorage([ ...cardsStorage, newCard ]);
+    const newCard = { ...formValues, id: uuidv4() };
+    
+    return cardsStorage ? setCardsStorage([ ...cardsStorage, newCard ])
+      : setCardsStorage([ newCard ]);
   }
 
-  async function handleSubmit (event: React.FormEvent<HTMLFormElement>)  {
+  function handleSubmit (event: React.FormEvent<HTMLFormElement>)  {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
     else saveCard();
-
-    // fetchSchema();
     setValidated(true);
   }
-
-  console.log("card info", cardSchema);
 
   function handleOnChange (event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -215,19 +217,10 @@ function FormModal({ show, onClose } :T.FormModalProps) {
                 {"Should have ate least 3 characters"}
               </S.Form.Control.Feedback> 
             </S.FormGroup>
+
           </Row>
-
           <S.FormLegend>*This field is mandatory</S.FormLegend>
-
-          {/* <Button type="submit">Submit form</Button> */}
         </S.Form>
-
-        {formValues.cardHolder} <br></br>
-        {formValues.cardAlias} <br></br>
-        {formValues.cardNumber} <br></br>
-        {formValues.expDate} <br></br>
-        {formValues.cvc} <br></br>
-        {formValues.scheme} <br></br>
       </S.ModalBody>
 
       <S.ModalFooter>

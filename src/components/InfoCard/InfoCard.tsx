@@ -3,23 +3,23 @@ import { Icon } from "components/Icon";
 import * as S from "./styles";
 import * as T from "./types";
 
-function InfoCard({title, type, number, client, code, expDate}: T.InfoCardProps) {
+function InfoCard({ cardAlias, scheme, cardNumber, cardHolder, cvc, expDate }: T.InfoCardProps) {
   return (
     <S.InfoCardContainer>
       <S.InfoContainer>
         <S.TypeContainer>
-          <Icon name={type} />
-          <div>{title}</div>
+          <Icon name={scheme} />
+          <div>{cardAlias}</div>
         </S.TypeContainer>
 
         <S.PersonalDataContainer>
           <S.UserContainer>
-            <S.CardNumber>{number}</S.CardNumber>
-            <div>{client}</div>
+            <S.CardNumber>{cardNumber}</S.CardNumber>
+            <div>{cardHolder}</div>
           </S.UserContainer>
 
           <S.CodeContainer>
-            <div>{code}</div>
+            <div>{cvc}</div>
             <div>{expDate}</div>
           </S.CodeContainer>
         </S.PersonalDataContainer>

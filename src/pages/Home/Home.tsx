@@ -1,27 +1,26 @@
 import { useState } from "react";
+import { useLocalStorage } from "react-use";
+
 import Button from "react-bootstrap/Button";
 
-import { FormModal } from "components/Modals";
-import { InfoCard } from "components/InfoCard";
-import { IconNames } from "components/Icon";
+import { publicStorages } from "constants/storage";
+import { CardModel } from "models/card.model";
 
+import { IconNames } from "components/Icon";
+import { InfoCard } from "components/InfoCard";
+import { FormModal } from "components/Modals";
+
+export { publicStorages } from "constants/storage";
 
 import * as S from "./styles";
 
-const cards = [
-  {id: 1, type: "visa", title: "Cartão do Uber", number: "1234567898765432", client: "JOHN DOE", code: "123", expDate: "07/2032"},
-  {id: 2, type: "masterCard", title: "ifood de sexta", number: "1234567898765432", client: "JOHN DOE", code: "123", expDate: "07/2030"},
-  {id: 3, type: "visa", title: "Livros da Amazon", number: "1234567898765432", client: "JOHN DOE", code: "123", expDate: "07/2030"},
-  {id: 4, type: "none", title: "Cartão do Uber", number: "1234567898765432", client: "JOHN DOE", code: "123", expDate: "07/2030"},
-  {id: 5, type: "none", title: "Cartão do Uber", number: "1234567898765432", client: "JOHN DOE", code: "123", expDate: "07/2030"},
-  {id: 6, type: "masterCard", title: "Caju", number: "1234567898765432", client: "JOHN DOE", code: "123", expDate: "07/2030"},
-  {id: 7, type: "jcb", title: "Livrarias", number: "1234567898765432", client: "JOHN DOE", code: "123", expDate: "07/2030"}
-];
-
+const { CARDS } = publicStorages;
 
 function Home() {
 
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [ showModal, setShowModal ] = useState<boolean>(false);
+  const [ cards ] = useLocalStorage<CardModel[]>(CARDS, []);
+
 
   const handleShowModal = () => setShowModal(true);
   const handleHideModal = () => setShowModal(false);
@@ -37,8 +36,8 @@ function Home() {
         </S.HeaderContainer>
         <S.CardsContainer>
           {
-            cards.length > 0 ?
-              cards.map(card => <InfoCard key={card.id} {...card} type={card.type as IconNames} />)
+            cards && cards.length > 0 ?
+              cards.map(card => <InfoCard key={card.id} {...card} scheme={card.scheme as IconNames} />)
               :
               <S.NoCards>
                 <h2>No cards yet</h2>

@@ -10,7 +10,7 @@ export const PageContainer = styled.main`
   min-height: calc(100% - 50px);
   position: relative;
 
-  padding: 80px 0;
+  padding: 30px 0;
   background: #F9FAFB;
 `;
 

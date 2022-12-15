@@ -1,5 +1,5 @@
-export type IconNames = "delete" | "edit" | "visa" | "masterCard" | "jcb" 
-| "discover" | "dinersClub" | "none" | "amex"
+export type IconNames = "delete" | "edit" | "visa" | "mastercard" | "jcb" 
+| "discover" | "diners" | "none" | "amex"
 
 export interface IconProps {
   name: IconNames
