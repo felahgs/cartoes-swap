@@ -45,12 +45,16 @@ module.exports = {
       { 
         newlinesBetween: "always",
         groups: [
-          "/^react/",
+          ["/^react$/", "/^react-use$/"],
+          ["/^react-bootstrap/"],
           "module",
           ["/^pages/", "/^components/"],
+          ["/^utils/"],
           ["parent", "sibling", "index"],
           ["/^styles/", "/^types/"]
         ],
+        alphabetize: { order: "asc", ignoreCase: true }, // configures imports in alphabetical (ascending) order, ignoring case
+
       },
     ],
   }
