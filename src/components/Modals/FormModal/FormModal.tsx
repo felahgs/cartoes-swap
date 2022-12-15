@@ -1,21 +1,35 @@
 import React, { useState } from "react";
+import { useAsyncFn , useDebounce, useLocalStorage } from "react-use";
+
+import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
+import { v4 as uuidv4 } from "uuid";
+
+import { api } from "services/binlist";
+
 import { 
   cardHolder as cardHolderRgx,
   cardNumber as cardNumberRgx,
+  cardNumberWhiteSpaces as spacedNumberRgx,
   expDate as expDateRgx,
-  cvc as cvcRgx
+  cvc as cvcRgx,
 } from "utils/regexValidation";
-import { formatCardNumber, formatExpirationDate, toCamelCase } from "utils/strings";
+import { 
+  formatCardNumber, 
+  formatExpirationDate,
+  toCamelCase,
+  removeWhiteSpaces
+} from "utils/strings";
 
-import * as T from "./types";
+
 import * as S from "./styles";
+import * as T from "./types";
 
-function FormModal({show, onClose} :T.FormModalProps) {
+function FormModal({ show, onClose } :T.FormModalProps) {
   
   const defaultValues = {
     cardAlias: "",
@@ -23,27 +37,76 @@ function FormModal({show, onClose} :T.FormModalProps) {
     cardNumber: "",
     expDate: "",
     cvc: "",
+    scheme: "none",
   };
 
-  const [formValue, setFormValue] = useState(defaultValues);
-  const [validated, setValidated] = useState(false);
+  const [ cardsStorage, setCardsStorage ] = useLocalStorage<any>("cards", []);
+  const [ isTypingCardNumber, setIsTypingCardNumber ] = useState(false);
+  const [ formValues, setformValues ] = useState(defaultValues);
+  const [ validated, setValidated ] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [ cardSchema, fetchSchema ] = useAsyncFn(async () => {
+    try {
+      const { cardNumber } = formValues;
+      const response = await api.get(cardNumber);
+      const result = response.data;
+      const { scheme } = result;
+      result.scheme ? setformValues({ ...formValues, scheme }) 
+        : setformValues({ ...formValues, scheme: "none" });
+  
+      return result;
+    }
+    catch(err) {
+      setformValues({ ...formValues, scheme: "none" });
+    }
+  }, [ formValues ]);
+
+  const [ , ] = useDebounce(
+    () => {
+      const { cardNumber }  = formValues;
+
+      console.log("regex test", !!cardNumber.match(cardNumberRgx));
+      if (cardNumber.match(cardNumberRgx)) {
+        fetchSchema();
+      }
+      setIsTypingCardNumber(false);
+    },
+    1500,
+    [ formValues.cardNumber ]
+  );
+  const isLoading = cardSchema.loading || isTypingCardNumber;
+
+  function saveCard() {
+    const newCard = { id: uuidv4(), ...formValues };
+    setCardsStorage([ ...cardsStorage, newCard ]);
+  }
+
+  async function handleSubmit (event: React.FormEvent<HTMLFormElement>)  {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-
     }
+    else saveCard();
 
+    // fetchSchema();
     setValidated(true);
-  };
+  }
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
+  console.log("card info", cardSchema);
 
-    setFormValue({...formValue, [toCamelCase(name)]: value});
-  };
+  function handleOnChange (event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+    const formattedName = toCamelCase(name);
+    let formattedValue = value;
+
+    if (formattedName === "cardNumber") {
+      setIsTypingCardNumber(true);
+      formattedValue = removeWhiteSpaces(value);
+    }
+    
+    setformValues({ ...formValues, [ formattedName ]: formattedValue });
+  }
 
   return (
     <S.Modal
@@ -67,7 +130,7 @@ function FormModal({show, onClose} :T.FormModalProps) {
               required
               name="card-alias"
               type="text"
-              value={formValue.cardAlias}
+              value={formValues.cardAlias}
               placeholder="e.g Blackfriday Sales"
               onChange={handleOnChange}
             />
@@ -83,12 +146,12 @@ function FormModal({show, onClose} :T.FormModalProps) {
               name="card-holder"
               type="text"
               pattern={cardHolderRgx}
-              value={formValue.cardHolder}
-              placeholder="Dino S. Sauro"
+              value={formValues.cardHolder}
+              placeholder="e.g Dino S Sauro"
               onChange={handleOnChange}
             />
             <S.Form.Control.Feedback type="invalid">
-              {formValue.cardHolder.length > 0 ? 
+              {formValues.cardHolder.length > 0 ? 
                 "It cannot contain accentuation or special characters!" 
                 : "Card holder is required!"
               }
@@ -104,9 +167,9 @@ function FormModal({show, onClose} :T.FormModalProps) {
                 inputMode="numeric"
                 autoComplete="cc-number"
                 required
-                pattern={cardNumberRgx}
+                pattern={spacedNumberRgx}
                 maxLength={19}
-                value={formatCardNumber(formValue.cardNumber)}
+                value={formatCardNumber(formValues.cardNumber)}
                 placeholder="XXXX XXXX XXXX XXXX"
                 onChange={handleOnChange}
               />
@@ -125,8 +188,8 @@ function FormModal({show, onClose} :T.FormModalProps) {
                 inputMode="numeric"
                 required 
                 pattern={expDateRgx}
-                // maxLength={7}
-                value={formatExpirationDate(formValue.expDate)}
+                maxLength={7}
+                value={formatExpirationDate(formValues.expDate)}
                 placeholder="MM/YYYY"
                 onChange={handleOnChange}
               />
@@ -144,7 +207,7 @@ function FormModal({show, onClose} :T.FormModalProps) {
                 required 
                 pattern={cvcRgx}
                 maxLength={4}
-                value={formValue.cvc}
+                value={formValues.cvc}
                 placeholder="CVC"
                 onChange={handleOnChange}
               />
@@ -158,10 +221,31 @@ function FormModal({show, onClose} :T.FormModalProps) {
 
           {/* <Button type="submit">Submit form</Button> */}
         </S.Form>
+
+        {formValues.cardHolder} <br></br>
+        {formValues.cardAlias} <br></br>
+        {formValues.cardNumber} <br></br>
+        {formValues.expDate} <br></br>
+        {formValues.cvc} <br></br>
+        {formValues.scheme} <br></br>
       </S.ModalBody>
 
       <S.ModalFooter>
-        <Button form="card-form" variant="primary" type="submit">Add card</Button>
+        <Button disabled={isLoading} form="card-form" variant="primary" type="submit">
+          { isLoading ? 
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              {" Loading..."}
+            </>
+            : "Add card"
+          }
+        </Button>
         <Button variant="outline-secondary" onClick={onClose}>
           {"cancel"}
         </Button>

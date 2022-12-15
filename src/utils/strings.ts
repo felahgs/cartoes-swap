@@ -11,7 +11,7 @@ export const formatCardNumber = (value: string | number) => {
     .replace(/\s+/g, "")
     .replace(/[^0-9]/gi, "");
   const matches = str.match(/\d{4,16}/g);
-  const match = matches && matches[0] || "";
+  const match = matches && matches[ 0 ] || "";
   const parts = [];
 
   for (let i=0, len=match.length; i<len; i+=4) {
@@ -33,4 +33,8 @@ export const formatExpirationDate = (value = "") => {
   }
 
   return clearValue;
+};
+
+export const removeWhiteSpaces = (str: string) => {
+  return str.trim().replace(/\s+/g, "");
 };

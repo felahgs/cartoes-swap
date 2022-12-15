@@ -32,6 +32,11 @@ code {
   font-weight: 500;
 }
 
+.btn-primary:disabled {
+  background-color: #233876;
+  border-color: #233876;
+}
+
 .form-control:invalid, .invalid-feedback{
   border-color: #F98080 !important;
   color: #F98080 !important;
