@@ -1,5 +1,7 @@
 import { Icon } from "components/Icon";
 
+import { hideCardNumber } from "utils/strings";
+
 import * as S from "./styles";
 import * as T from "./types";
 
@@ -14,7 +16,7 @@ function InfoCard({ cardAlias, scheme, cardNumber, cardHolder, cvc, expDate }: T
 
         <S.PersonalDataContainer>
           <S.UserContainer>
-            <S.CardNumber>{cardNumber}</S.CardNumber>
+            <S.CardNumber>{hideCardNumber(cardNumber)}</S.CardNumber>
             <div>{cardHolder}</div>
           </S.UserContainer>
 

@@ -25,6 +25,18 @@ export const formatCardNumber = (value: string | number) => {
   }
 };
 
+export const hideCardNumber = (card: string) => {
+  const hideNum = [];
+  for(let i = 0; i < card.length; i++){
+    if(i < card.length-4){
+      hideNum.push("*");
+    }else{
+      hideNum.push(card[ i ]);
+    }
+  }
+  return hideNum.join("");
+};
+
 export const formatExpirationDate = (value = "") => {
   const clearValue = value.replace(/\D+/g, "");
 
