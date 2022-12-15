@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import {devices} from "utils/breakpoints";
+import { devices } from "utils/breakpoints";
 
 export const PageContainer = styled.main`
   display: flex;

@@ -49,7 +49,7 @@ module.exports = {
       { 
         newlinesBetween: "always",
         groups: [
-          [ "/^react$/", "/^react-use$/" ],
+          [ "/^react$/", "/^react-dom/", "/^react-use$/" ],
           [ "/^react-bootstrap/" ],
           [ "module" ],
           "/services/",

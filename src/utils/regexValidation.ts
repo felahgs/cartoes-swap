@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 /* eslint-disable no-useless-escape */
 export const cardHolder = "[a-z A-Z- .]+";
 export const cardNumberWhiteSpaces = "[0-9| ]{17,19}";

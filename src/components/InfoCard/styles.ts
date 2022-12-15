@@ -15,13 +15,13 @@ export const InfoCardContainer = styled.div`
   color: #6B7280;
   background: #FFFFFF;
 
-  transition: bottom 0.2s ease-in-out 0s;
+  transition: bottom 0.1s ease-in-out 0s;
   bottom: 0;
 
   &:hover {
     box-shadow: 0px 1px 20px 6px rgba(0, 0, 0, 0.08);
     position: relative;
-    bottom: 4px;
+    bottom: 2px;
   }
 `;
 

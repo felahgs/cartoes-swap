@@ -1,0 +1,74 @@
+[
+  {
+    "id": "b68d5db9-2ae5-4980-b17e-7dd289df7b2c",
+    "cardAlias": "Cartão Uber",
+    "cardHolder": "John Doe",
+    "cardNumber": "5231407967387306",
+    "expDate": "11/2023",
+    "cvc": "414",
+    "scheme": "mastercard"
+  },
+  {
+    "id": "1669a2dd-d2b8-43b8-95af-0e246d36c887",
+    "cardAlias": "Ifood sexta",
+    "cardHolder": "Jane Doe",
+    "cardNumber": "4539544331830488",
+    "expDate": "12/2023",
+    "cvc": "220",
+    "scheme": "visa"
+  },
+  {
+    "id": "a047a5e5-6c28-4764-beae-2a024e808ce6",
+    "cardAlias": "Livros Amazon",
+    "cardHolder": "Lucas Pereira",
+    "cardNumber": "4485434341450655",
+    "expDate": "12/2023",
+    "cvc": "959",
+    "scheme": "visa"
+  },
+  {
+    "id": "1f43451e-f93e-43c6-97bb-b734e3a138e9",
+    "cardAlias": "Importados",
+    "cardHolder": "Pedro Silveira",
+    "cardNumber": "37443920915208",
+    "expDate": "08/2023",
+    "cvc": "123",
+    "scheme": "amex"
+  },
+  {
+    "id": "11e1deda-537b-4732-9b88-2421cd53739e",
+    "cardAlias": "Viagem",
+    "cardHolder": "Maria Luiza ",
+    "cardNumber": "6011425933506217",
+    "expDate": "02/2027",
+    "cvc": "456",
+    "scheme": "mastercard"
+  },
+  {
+    "id": "b675c660-0ab5-412d-8bde-10538f20b9c2",
+    "cardAlias": "Restaurante",
+    "cardHolder": "Pedro Pascal",
+    "cardNumber": "3530111333300000",
+    "expDate": "11/2026",
+    "cvc": "987",
+    "scheme": "jcb"
+  },
+  {
+    "id": "e0e2065d-e043-4f39-8388-3d6380ad0b65",
+    "cardAlias": "Roupas",
+    "cardHolder": "Fulano de Tal",
+    "cardNumber": "6011000990139424",
+    "expDate": "11/2077",
+    "cvc": "1701",
+    "scheme": "discover"
+  },
+  {
+    "id": "62ee9618-3cc5-4d84-9b54-a52a5fad0f78",
+    "cardAlias": "Passagens",
+    "cardHolder": "John Doe",
+    "cardNumber": "0000000000000000",
+    "expDate": "12/2025",
+    "cvc": "451",
+    "scheme": "none"
+  }
+]
