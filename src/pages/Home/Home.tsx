@@ -19,24 +19,29 @@ const { CARDS } = localStorages;
 
 function Home() {
   const { CONFIRMATION_MODAL, FORM_MODAL } = modalNames;
-  const [activeModal, setModal] = useState<string>("");
-  const [selectedCard, setSelectedCard] = useState<string>("");
-  const [cards, setCards] = useLocalStorage<CardModel[]>(CARDS, []);
-
-  function handleOpenModal(value: string) {
-    setModal(value);
-  }
+  const [ activeModal, setModal ] = useState<string>("");
+  const [ editingCard, setEditingCard ] = useState<CardModel | null>(null);
+  const [ selectedCard, setSelectedCard ] = useState<string>("");
+  const [ cards, setCards ] = useLocalStorage<CardModel[]>(CARDS, []);
 
   function handleCloseModal() {
     setModal("");
   }
 
-  function handleCardEditAction() {
-    handleOpenModal(FORM_MODAL);
+  function handleAddCard() {
+    setEditingCard(null);
+    setModal(FORM_MODAL);
+  }
+
+  function handleCardEditAction(id: string) {
+    const cardToEdit = cards?.find((card) => card.id === id);
+    setModal(FORM_MODAL);
+
+    return cardToEdit ? setEditingCard(cardToEdit) : null;
   }
 
   function handleCardDeleteAction(id: string) {
-    handleOpenModal(CONFIRMATION_MODAL);
+    setModal(CONFIRMATION_MODAL);
     setSelectedCard(id);
   }
 
@@ -47,7 +52,7 @@ function Home() {
 
   return (
     <S.PageContainer className="Home">
-      <FormModal show={activeModal === FORM_MODAL} onClose={handleCloseModal} />
+      <FormModal editingCard={editingCard} show={activeModal === FORM_MODAL} onClose={handleCloseModal} />
       <CofirmationModal
         show={activeModal === CONFIRMATION_MODAL}
         onClose={handleCloseModal}
@@ -56,7 +61,7 @@ function Home() {
       <S.ListContainer>
         <S.HeaderContainer>
           <h1>My Cards</h1>
-          <Button onClick={() => handleOpenModal(FORM_MODAL)}>
+          <Button onClick={handleAddCard}>
             Add new card
           </Button>
         </S.HeaderContainer>
@@ -67,7 +72,7 @@ function Home() {
                 key={card.id}
                 {...card}
                 scheme={card.scheme as IconNames}
-                onEdit={handleCardEditAction}
+                onEdit={() => handleCardEditAction(card.id)}
                 onDelete={() => handleCardDeleteAction(card.id)}
               />
             ))

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useAsyncFn , useDebounce, useLocalStorage } from "react-use";
+import React, { useLayoutEffect, useState } from "react";
+import { useAsyncFn, useDebounce, useLocalStorage } from "react-use";
 
 import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -13,26 +13,24 @@ import { v4 as uuidv4 } from "uuid";
 
 import { api } from "services/binlist";
 
-import { 
+import {
   cardHolder as cardHolderRgx,
   cardNumber as cardNumberRgx,
   cardNumberWhiteSpaces as spacedNumberRgx,
   expDate as expDateRgx,
   cvc as cvcRgx,
 } from "utils/regexValidation";
-import { 
-  formatCardNumber, 
+import {
+  formatCardNumber,
   formatExpirationDate,
   toCamelCase,
-  removeWhiteSpaces
+  removeWhiteSpaces,
 } from "utils/strings";
 
 import * as S from "./styles";
 import * as T from "./types";
 
-
-function FormModal({ show, onClose } :T.FormModalProps) {
-  
+function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
   const defaultValues = {
     id: "",
     cardAlias: "",
@@ -44,10 +42,14 @@ function FormModal({ show, onClose } :T.FormModalProps) {
   };
 
   const { CARDS } = localStorages;
-  const [ cardsStorage, setCardsStorage ] = useLocalStorage<CardModel[]>(CARDS, []);
+  const [ cardsStorage, setCardsStorage ] = useLocalStorage<CardModel[]>(
+    CARDS,
+    []
+  );
   const [ isTypingCardNumber, setIsTypingCardNumber ] = useState(false);
-  const [ formValues, setformValues ] = useState(defaultValues);
+  const [ formValues, setformValues ] = useState(editingCard || defaultValues);
   const [ validated, setValidated ] = useState(false);
+  const isEditing = !!editingCard;
 
   const [ cardSchema, fetchSchema ] = useAsyncFn(async () => {
     try {
@@ -55,19 +57,19 @@ function FormModal({ show, onClose } :T.FormModalProps) {
       const response = await api.get(cardNumber);
       const result = response.data;
       const { scheme } = result;
-      result.scheme ? setformValues({ ...formValues, scheme }) 
+      result.scheme
+        ? setformValues({ ...formValues, scheme })
         : setformValues({ ...formValues, scheme: "none" });
-  
+
       return result;
-    }
-    catch(err) {
+    } catch (err) {
       setformValues({ ...formValues, scheme: "none" });
     }
   }, [ formValues ]);
 
   const [ , ] = useDebounce(
     () => {
-      const { cardNumber }  = formValues;
+      const { cardNumber } = formValues;
 
       if (cardNumber.match(cardNumberRgx)) {
         fetchSchema();
@@ -82,22 +84,26 @@ function FormModal({ show, onClose } :T.FormModalProps) {
 
   function saveCard() {
     const newCard = { ...formValues, id: uuidv4() };
-    
-    return cardsStorage ? setCardsStorage([ ...cardsStorage, newCard ])
+
+    return cardsStorage
+      ? setCardsStorage([ ...cardsStorage, newCard ])
       : setCardsStorage([ newCard ]);
   }
 
-  function handleSubmit (event: React.FormEvent<HTMLFormElement>)  {
+  // function updateCard() {
+
+  // };
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-    }
-    else saveCard();
+    } else saveCard();
     setValidated(true);
   }
 
-  function handleOnChange (event: React.ChangeEvent<HTMLInputElement>) {
+  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
     const formattedName = toCamelCase(name);
     let formattedValue = value;
@@ -106,29 +112,32 @@ function FormModal({ show, onClose } :T.FormModalProps) {
       setIsTypingCardNumber(true);
       formattedValue = removeWhiteSpaces(value);
     }
-    
+
     setformValues({ ...formValues, [ formattedName ]: formattedValue });
   }
 
-  function handleClose () {
+  function handleClose() {
     onClose();
+    setformValues(defaultValues);
     setValidated(false);
   }
 
+  const buttonLabel = isEditing ? "Edit" : "Add card";
+
+  useLayoutEffect(() => {
+    editingCard && setformValues(editingCard);
+  }, [ editingCard, isEditing ]);
+
   return (
-    <S.Modal
-      show={show}
-      onHide={handleClose}
-      centered
-    >
-      <S.ModalHeader closeButton/>
-      <S.ModalBody >
-        <S.ModalTitle>Add new card</S.ModalTitle>
-        <S.Form 
-          id="card-form" 
-          autoComplete="on" 
-          noValidate 
-          validated={validated} 
+    <S.Modal show={show} onHide={handleClose} centered>
+      <S.ModalHeader closeButton />
+      <S.ModalBody>
+        <S.ModalTitle>{isEditing ? "Edit card" : "Add new Card"}</S.ModalTitle>
+        <S.Form
+          id="card-form"
+          autoComplete="on"
+          noValidate
+          validated={validated}
           onSubmit={handleSubmit}
         >
           <S.FormGroup controlid="card-alias">
@@ -158,10 +167,9 @@ function FormModal({ show, onClose } :T.FormModalProps) {
               onChange={handleOnChange}
             />
             <S.Form.Control.Feedback type="invalid">
-              {formValues.cardHolder.length > 0 ? 
-                "It cannot contain accentuation or special characters!" 
-                : "Card holder is required!"
-              }
+              {formValues.cardHolder.length > 0
+                ? "It cannot contain accentuation or special characters!"
+                : "Card holder is required!"}
             </S.Form.Control.Feedback>
           </S.FormGroup>
 
@@ -189,11 +197,11 @@ function FormModal({ show, onClose } :T.FormModalProps) {
           <Row>
             <S.FormGroup as={Col} md="7" controlid="exp-date">
               <S.FormLabel>Expiration month and year*</S.FormLabel>
-              <S.Form.Control 
-                type="tel" 
+              <S.Form.Control
+                type="tel"
                 name="exp-date"
                 inputMode="numeric"
-                required 
+                required
                 pattern={expDateRgx}
                 maxLength={7}
                 value={formatExpirationDate(formValues.expDate)}
@@ -207,11 +215,11 @@ function FormModal({ show, onClose } :T.FormModalProps) {
 
             <S.FormGroup as={Col} md="5" controlid="cvc">
               <S.FormLabel>CVC*</S.FormLabel>
-              <S.Form.Control 
-                type="tel" 
+              <S.Form.Control
+                type="tel"
                 name="cvc"
                 inputMode="numeric"
-                required 
+                required
                 pattern={cvcRgx}
                 maxLength={4}
                 value={formValues.cvc}
@@ -220,17 +228,21 @@ function FormModal({ show, onClose } :T.FormModalProps) {
               />
               <S.Form.Control.Feedback type="invalid">
                 {"Should have ate least 3 characters"}
-              </S.Form.Control.Feedback> 
+              </S.Form.Control.Feedback>
             </S.FormGroup>
-
           </Row>
           <S.FormLegend>*This field is mandatory</S.FormLegend>
         </S.Form>
       </S.ModalBody>
 
       <S.ModalFooter>
-        <Button disabled={isLoading} form="card-form" variant="primary" type="submit">
-          { isLoading ? 
+        <Button
+          disabled={isLoading}
+          form="card-form"
+          variant="primary"
+          type="submit"
+        >
+          {isLoading ? (
             <>
               <Spinner
                 as="span"
@@ -241,8 +253,9 @@ function FormModal({ show, onClose } :T.FormModalProps) {
               />
               {" Loading..."}
             </>
-            : "Add card"
-          }
+          ) : (
+            buttonLabel
+          )}
         </Button>
         <Button variant="outline-secondary" onClick={handleClose}>
           {"cancel"}
