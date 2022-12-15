@@ -1,3 +1,4 @@
+import alert from "assets/icons/alert.svg";
 import amex from "assets/icons/card-amex.svg";
 import cardBack from "assets/icons/card-back.svg";
 import diners from "assets/icons/card-diners-club.svg";
@@ -21,6 +22,7 @@ const iconList = {
   visa: visa,
   mastercard: mastercard,
   jcb: jcb,
+  alert: alert
 };
 
 function Icon({ name, onClick }: T.IconProps) {

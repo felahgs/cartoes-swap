@@ -3,48 +3,81 @@ import { useLocalStorage } from "react-use";
 
 import Button from "react-bootstrap/Button";
 
-import { publicStorages } from "constants/storage";
+import { modalNames } from "constants/modal";
+import { localStorages } from "constants/storage";
 import { CardModel } from "models/card.model";
 
 import { IconNames } from "components/Icon";
 import { InfoCard } from "components/InfoCard";
-import { FormModal } from "components/Modals";
+import { CofirmationModal, FormModal } from "components/Modals";
 
-export { publicStorages } from "constants/storage";
+export { localStorages } from "constants/storage";
 
 import * as S from "./styles";
 
-const { CARDS } = publicStorages;
+const { CARDS } = localStorages;
 
 function Home() {
+  const { CONFIRMATION_MODAL, FORM_MODAL } = modalNames;
+  const [activeModal, setModal] = useState<string>("");
+  const [selectedCard, setSelectedCard] = useState<string>("");
+  const [cards, setCards] = useLocalStorage<CardModel[]>(CARDS, []);
 
-  const [ showModal, setShowModal ] = useState<boolean>(false);
-  const [ cards ] = useLocalStorage<CardModel[]>(CARDS, []);
+  function handleOpenModal(value: string) {
+    setModal(value);
+  }
 
+  function handleCloseModal() {
+    setModal("");
+  }
 
-  const handleShowModal = () => setShowModal(true);
-  const handleHideModal = () => setShowModal(false);
+  function handleCardEditAction() {
+    handleOpenModal(FORM_MODAL);
+  }
+
+  function handleCardDeleteAction(id: string) {
+    handleOpenModal(CONFIRMATION_MODAL);
+    setSelectedCard(id);
+  }
+
+  function handleOnConfirm() {
+    const updatedCards = cards?.filter((card) => card.id !== selectedCard);
+    setCards(updatedCards);
+  }
 
   return (
     <S.PageContainer className="Home">
-      <FormModal show={showModal} onClose={handleHideModal} />
+      <FormModal show={activeModal === FORM_MODAL} onClose={handleCloseModal} />
+      <CofirmationModal
+        show={activeModal === CONFIRMATION_MODAL}
+        onClose={handleCloseModal}
+        onConfirm={handleOnConfirm}
+      />
       <S.ListContainer>
-
         <S.HeaderContainer>
           <h1>My Cards</h1>
-          <Button onClick={handleShowModal}>Add new card</Button>
+          <Button onClick={() => handleOpenModal(FORM_MODAL)}>
+            Add new card
+          </Button>
         </S.HeaderContainer>
         <S.CardsContainer>
-          {
-            cards && cards.length > 0 ?
-              cards.map(card => <InfoCard key={card.id} {...card} scheme={card.scheme as IconNames} />)
-              :
-              <S.NoCards>
-                <h2>No cards yet</h2>
-                <p>{"When you have cards you'll"}</p>
-                <p>see them here</p>
-              </S.NoCards>
-          }
+          {cards && cards.length > 0 ? (
+            cards.map((card) => (
+              <InfoCard
+                key={card.id}
+                {...card}
+                scheme={card.scheme as IconNames}
+                onEdit={handleCardEditAction}
+                onDelete={() => handleCardDeleteAction(card.id)}
+              />
+            ))
+          ) : (
+            <S.NoCards>
+              <h2>No cards yet</h2>
+              <p>{"When you have cards you'll"}</p>
+              <p>see them here</p>
+            </S.NoCards>
+          )}
         </S.CardsContainer>
       </S.ListContainer>
     </S.PageContainer>

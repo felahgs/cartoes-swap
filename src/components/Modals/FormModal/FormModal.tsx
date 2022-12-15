@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
-import { publicStorages } from "constants/storage";
+import { localStorages } from "constants/storage";
 import { CardModel } from "models/card.model";
 import { v4 as uuidv4 } from "uuid";
 
@@ -43,7 +43,7 @@ function FormModal({ show, onClose } :T.FormModalProps) {
     scheme: "none",
   };
 
-  const { CARDS } = publicStorages;
+  const { CARDS } = localStorages;
   const [ cardsStorage, setCardsStorage ] = useLocalStorage<CardModel[]>(CARDS, []);
   const [ isTypingCardNumber, setIsTypingCardNumber ] = useState(false);
   const [ formValues, setformValues ] = useState(defaultValues);
@@ -110,10 +110,15 @@ function FormModal({ show, onClose } :T.FormModalProps) {
     setformValues({ ...formValues, [ formattedName ]: formattedValue });
   }
 
+  function handleClose () {
+    onClose();
+    setValidated(false);
+  }
+
   return (
     <S.Modal
       show={show}
-      onHide={onClose}
+      onHide={handleClose}
       centered
     >
       <S.ModalHeader closeButton/>
@@ -239,7 +244,7 @@ function FormModal({ show, onClose } :T.FormModalProps) {
             : "Add card"
           }
         </Button>
-        <Button variant="outline-secondary" onClick={onClose}>
+        <Button variant="outline-secondary" onClick={handleClose}>
           {"cancel"}
         </Button>
       </S.ModalFooter>

@@ -1,3 +1,3 @@
-export const publicStorages = {
+export const localStorages = {
   CARDS: "cards",
 };

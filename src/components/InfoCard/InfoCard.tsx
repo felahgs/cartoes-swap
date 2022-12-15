@@ -5,7 +5,17 @@ import { hideCardNumber } from "utils/strings";
 import * as S from "./styles";
 import * as T from "./types";
 
-function InfoCard({ cardAlias, scheme, cardNumber, cardHolder, cvc, expDate }: T.InfoCardProps) {
+function InfoCard({
+  cardAlias,
+  scheme,
+  cardNumber,
+  cardHolder,
+  cvc,
+  expDate,
+  onDelete,
+  onEdit,
+}: T.InfoCardProps) {
+
   return (
     <S.InfoCardContainer>
       <S.InfoContainer>
@@ -28,8 +38,8 @@ function InfoCard({ cardAlias, scheme, cardNumber, cardHolder, cvc, expDate }: T
       </S.InfoContainer>
 
       <S.ActionsContainer>
-        <Icon onClick={() => console.log("do something")} name="edit" />
-        <Icon onClick={() => console.log("do something")} name="delete" />
+        <Icon onClick={onEdit} name="edit" />
+        <Icon onClick={onDelete} name="delete" />
       </S.ActionsContainer>
     </S.InfoCardContainer>
   );

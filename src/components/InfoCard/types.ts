@@ -8,4 +8,6 @@ export interface InfoCardProps {
   cardNumber: string;
   expDate: string;
   cvc: string;
+  onDelete: () => void;
+  onEdit: () => void;
 }
