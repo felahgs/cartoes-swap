@@ -31,13 +31,12 @@ function FormModal({show, onClose} :T.FormModalProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      alert("invalid form");
       event.preventDefault();
       event.stopPropagation();
+
     }
 
     setValidated(true);
-    console.log("form event", event);
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,9 +125,9 @@ function FormModal({show, onClose} :T.FormModalProps) {
                 inputMode="numeric"
                 required 
                 pattern={expDateRgx}
-                maxLength={5}
+                // maxLength={7}
                 value={formatExpirationDate(formValue.expDate)}
-                placeholder="MM/YY"
+                placeholder="MM/YYYY"
                 onChange={handleOnChange}
               />
               <S.Form.Control.Feedback type="invalid">
