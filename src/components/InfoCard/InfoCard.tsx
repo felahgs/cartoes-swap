@@ -18,13 +18,13 @@ function InfoCard({
 
   return (
     <S.InfoCardContainer>
-      <S.InfoContainer>
+      <S.MainContent>
         <S.TypeContainer>
           <Icon name={scheme} />
           <div>{cardAlias}</div>
         </S.TypeContainer>
 
-        <S.PersonalDataContainer>
+        <S.SensibleDataContainer>
           <S.UserContainer>
             <S.CardNumber>{hideCardNumber(cardNumber)}</S.CardNumber>
             <div>{cardHolder}</div>
@@ -34,8 +34,8 @@ function InfoCard({
             <div>{cvc}</div>
             <div>{expDate}</div>
           </S.CodeContainer>
-        </S.PersonalDataContainer>
-      </S.InfoContainer>
+        </S.SensibleDataContainer>
+      </S.MainContent>
 
       <S.ActionsContainer>
         <Icon onClick={onEdit} name="edit" />

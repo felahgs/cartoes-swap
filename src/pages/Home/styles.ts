@@ -17,7 +17,7 @@ export const PageContainer = styled.main`
 export const ListContainer = styled.div`
   padding: 0 16px;
   
-  @media ${devices.desktop} {
+  @media ${devices.laptop} {
     width: 860px;
     margin-bottom: 40px;
   }
@@ -31,9 +31,20 @@ export const HeaderContainer = styled.div`
   padding: 36px 0;
 
   h1 {
+    align-self: center;
     color: #233876;
     font-weight: 700;
-    font-size: 36px;
+    font-size: 20px;
+    margin: 0;
+
+    @media ${devices.tablet} {
+      font-size: 24px;
+
+    }
+
+    @media ${devices.laptop} {
+      font-size: 36px;
+    }
   }
 `;
 
