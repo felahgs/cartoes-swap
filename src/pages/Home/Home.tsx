@@ -48,6 +48,7 @@ function Home() {
   function handleOnConfirm() {
     const updatedCards = cards?.filter((card) => card.id !== selectedCard);
     setCards(updatedCards);
+    setActiveModal("");
   }
 
   return (

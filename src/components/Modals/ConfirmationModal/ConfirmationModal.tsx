@@ -10,12 +10,10 @@ function ConfirmationModal({
   onClose,
   onConfirm,
 }: T.ConfirmationModalProps) {
-
-  function handleConfirm () {
+  function handleConfirm() {
     onConfirm();
-    onClose();
   }
-  
+
   {
     return (
       <S.Modal show={show} onHide={onClose} centered>
@@ -25,10 +23,10 @@ function ConfirmationModal({
           <p>{message}</p>
         </S.ModalBody>
         <S.ModalFooter>
-          <Button variant="danger" onClick={handleConfirm}>
-            {"Yes, I'm sure"} 
+          <Button name="confirm" variant="danger" onClick={handleConfirm}>
+            {"Yes, I'm sure"}
           </Button>
-          <Button variant="outline-secondary" onClick={onClose}>
+          <Button name="cancel" variant="outline-secondary" onClick={onClose}>
             No, cancel
           </Button>
         </S.ModalFooter>
