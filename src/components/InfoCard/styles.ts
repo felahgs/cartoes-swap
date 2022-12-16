@@ -85,7 +85,11 @@ export const TypeContainer = styled.div`
     align-items: center;
     flex-direction: row;
     gap: 10px;
-    width: 95%;
+    width: 90%;
+
+    @media ${devices.mobileL} {
+      width: 40%;
+    }
   `;
 
 export const SensibleDataContainer = styled.div`
@@ -96,10 +100,6 @@ export const SensibleDataContainer = styled.div`
   row-gap: 20px;
   justify-content: space-between;
     
-  @media ${devices.mobileL} {
-      width: 40%;
-  }
-
   @media ${devices.laptop} {
     width: 50%;
     flex-direction: row;

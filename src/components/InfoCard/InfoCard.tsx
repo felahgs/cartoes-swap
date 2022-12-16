@@ -38,10 +38,10 @@ function InfoCard({
       </S.MainContent>
 
       <S.ActionsContainer>
-        <Button onClick={onEdit} variant="link">
+        <Button onClick={onEdit} size="sm" variant="link">
           <Icon name="edit" />
         </Button>
-        <Button onClick={onDelete} variant="link">
+        <Button onClick={onDelete} size="sm" variant="link">
           <Icon name="delete" />
         </Button>
       </S.ActionsContainer>
