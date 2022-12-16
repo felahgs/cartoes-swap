@@ -5,6 +5,7 @@ import * as S from "./styles";
 import * as T from "./types";
 
 function ConfirmationModal({
+  message,
   show,
   onClose,
   onConfirm,
@@ -21,7 +22,7 @@ function ConfirmationModal({
         <S.ModalHeader closeButton />
         <S.ModalBody>
           <Icon name="alert" />
-          <p>Are you sure you want to delete this card?</p>
+          <p>{message}</p>
         </S.ModalBody>
         <S.ModalFooter>
           <Button variant="danger" onClick={handleConfirm}>

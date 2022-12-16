@@ -1,5 +1,6 @@
 export interface ConfirmationModalProps {
-  show?: boolean;
+  show: boolean;
+  message: string;
   onClose: () => void;
   onConfirm: () => void;
 }

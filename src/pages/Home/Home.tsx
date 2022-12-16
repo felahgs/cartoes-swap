@@ -54,6 +54,7 @@ function Home() {
     <S.PageContainer className="Home">
       <FormModal editingCard={editingCard} show={activeModal === FORM_MODAL} onClose={handleCloseModal} />
       <CofirmationModal
+        message="Are you sure you want to delete this card?"
         show={activeModal === CONFIRMATION_MODAL}
         onClose={handleCloseModal}
         onConfirm={handleOnConfirm}
