@@ -51,6 +51,8 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
   const [ validated, setValidated ] = useState(false);
   const isEditing = !!editingCard;
 
+  const buttonLabel = isEditing ? "Edit card" : "Add card";
+
   const [ cardSchema, fetchSchema ] = useAsyncFn(async () => {
     try {
       const { cardNumber } = formValues;
@@ -134,8 +136,6 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
     setformValues(defaultValues);
     setValidated(false);
   }
-
-  const buttonLabel = isEditing ? "Edit card" : "Add card";
 
   useLayoutEffect(() => {
     editingCard && setformValues(editingCard);
