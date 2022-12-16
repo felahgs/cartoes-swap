@@ -11,7 +11,6 @@ export const InfoCardContainer = styled.div`
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08);
   margin: 16px 0;
   padding: 16px;
-  min-height: 100px;
   height: 175px;
 
   font-size: 16px;
@@ -21,8 +20,6 @@ export const InfoCardContainer = styled.div`
   transition: bottom 0.1s ease-in-out 0s;
   bottom: 0;
 
-  white-space: nowrap;
-
   &:hover {
     box-shadow: 0px 1px 20px 6px rgba(0, 0, 0, 0.08);
     position: relative;
@@ -31,7 +28,12 @@ export const InfoCardContainer = styled.div`
 
   @media ${devices.mobileL} {
     padding: 0 16px;
-    height: auto;
+    height: 125px;
+  }
+
+  @media ${devices.laptop} {
+    padding: 0 16px;
+    height: 100px;
   }
 `;
 
@@ -47,10 +49,10 @@ export const MainContent = styled.div`
   @media ${devices.mobileL} {
     flex-direction: row;
     align-items: center;
+    column-gap: 30px;
   }
 
   @media ${devices.laptop} {
-      width: 60%;
       justify-content: space-between;
      }
 `;
@@ -65,7 +67,8 @@ export const ActionsContainer = styled.div`
     width: 20%;
     height: 100%;
 
-    @media ${devices.mobileL} {
+
+    @media ${devices.tablet} {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
@@ -82,10 +85,10 @@ export const TypeContainer = styled.div`
     align-items: center;
     flex-direction: row;
     gap: 10px;
-    width: 40%;
+    width: 95%;
   `;
 
-export const SensibleDataContainer =styled.div`
+export const SensibleDataContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
@@ -93,6 +96,10 @@ export const SensibleDataContainer =styled.div`
   row-gap: 20px;
   justify-content: space-between;
     
+  @media ${devices.mobileL} {
+      width: 40%;
+  }
+
   @media ${devices.laptop} {
     width: 50%;
     flex-direction: row;

@@ -158,6 +158,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
               required
               name="card-alias"
               type="text"
+              maxLength={25}
               value={formValues.cardAlias}
               placeholder="e.g Blackfriday Sales"
               onChange={handleOnChange}
@@ -174,6 +175,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
               name="card-holder"
               type="text"
               pattern={cardHolderRgx}
+              maxLength={25}
               value={formValues.cardHolder}
               placeholder="e.g Dino S Sauro"
               onChange={handleOnChange}
