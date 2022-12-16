@@ -19,29 +19,30 @@ const { CARDS } = localStorages;
 
 function Home() {
   const { CONFIRMATION_MODAL, FORM_MODAL } = modalNames;
-  const [ activeModal, setModal ] = useState<string>("");
+  const [ activeModal, setActiveModal ] = useState<string>("");
   const [ editingCard, setEditingCard ] = useState<CardModel | null>(null);
   const [ selectedCard, setSelectedCard ] = useState<string>("");
   const [ cards, setCards ] = useLocalStorage<CardModel[]>(CARDS, []);
 
   function handleCloseModal() {
-    setModal("");
+    if(activeModal === modalNames.FORM_MODAL) setEditingCard(null);
+    setActiveModal("");
   }
 
   function handleAddCard() {
     setEditingCard(null);
-    setModal(FORM_MODAL);
+    setActiveModal(FORM_MODAL);
   }
 
   function handleCardEditAction(id: string) {
     const cardToEdit = cards?.find((card) => card.id === id);
-    setModal(FORM_MODAL);
+    setActiveModal(FORM_MODAL);
 
     return cardToEdit ? setEditingCard(cardToEdit) : null;
   }
 
   function handleCardDeleteAction(id: string) {
-    setModal(CONFIRMATION_MODAL);
+    setActiveModal(CONFIRMATION_MODAL);
     setSelectedCard(id);
   }
 

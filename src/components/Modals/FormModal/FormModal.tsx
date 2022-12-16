@@ -133,7 +133,6 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
 
   function handleClose() {
     onClose();
-    setformValues(defaultValues);
     setValidated(false);
   }
 
@@ -244,6 +243,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
               </S.Form.Control.Feedback>
             </S.FormGroup>
           </Row>
+
           <S.FormLegend>*This field is mandatory</S.FormLegend>
         </S.Form>
       </S.ModalBody>
