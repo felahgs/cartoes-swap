@@ -25,11 +25,11 @@ const iconList = {
   alert: alert
 };
 
-function Icon({ name, onClick }: T.IconProps) {
+function Icon({ name }: T.IconProps) {
   return (
-    <S.ClicklabeIcon clickable={!!onClick} title={name} onClick={onClick}>
+    <S.Icon title={name}>
       <img src={iconList?.[ name ]} alt={name} />
-    </S.ClicklabeIcon>
+    </S.Icon>
   );
 }
 

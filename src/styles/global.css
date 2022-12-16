@@ -19,45 +19,6 @@ code {
     monospace;
 }
 
-
-/* Cootstrap components customization */
-.btn {
-  height: 37px;
-}
-
-.btn-primary {
-  background-color: #233876;
-  border-color: #233876;
-
-  font-weight: 500;
-}
-
-.btn-outline-secondary {
-  color: #1F2A37;
-}
-
-.btn-danger {
-  --bs-btn-color: #fff;
-  --bs-btn-bg: #F98080;
-  --bs-btn-border-color: #F98080;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #b85f5f;
-  --bs-btn-hover-border-color: #b85f5f;
-  --bs-btn-focus-shadow-rgb: 225,83,97;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #b85f5f;
-  --bs-btn-active-border-color: rgb(184, 46, 60);
-  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #F98080;
-  --bs-btn-disabled-border-color: #F98080;
-}
-
-.btn-primary:disabled {
-  background-color: #233876;
-  border-color: #233876;
-}
-
 .form-control {
   background-image: none !important;
 }

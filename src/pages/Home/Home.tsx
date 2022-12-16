@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useLocalStorage } from "react-use";
 
-import Button from "react-bootstrap/Button";
-
 import { modalNames } from "constants/modal";
 import { localStorages } from "constants/storage";
 import { CardModel } from "models/card.model";
 
+import { Button } from "components/Button";
 import { IconNames } from "components/Icon";
 import { InfoCard } from "components/InfoCard";
 import { CofirmationModal, FormModal } from "components/Modals";

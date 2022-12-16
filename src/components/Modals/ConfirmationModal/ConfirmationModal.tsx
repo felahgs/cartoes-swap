@@ -1,5 +1,4 @@
-import { Button } from "react-bootstrap";
-
+import { Button } from "components/Button";
 import { Icon } from "components/Icon";
 
 import * as S from "./styles";

@@ -1,3 +1,4 @@
+import { Button } from "components/Button";
 import { Icon } from "components/Icon";
 
 import { hideCardNumber } from "utils/strings";
@@ -15,7 +16,6 @@ function InfoCard({
   onDelete,
   onEdit,
 }: T.InfoCardProps) {
-
   return (
     <S.InfoCardContainer>
       <S.MainContent>
@@ -38,8 +38,12 @@ function InfoCard({
       </S.MainContent>
 
       <S.ActionsContainer>
-        <Icon onClick={onEdit} name="edit" />
-        <Icon onClick={onDelete} name="delete" />
+        <Button onClick={onEdit} variant="link">
+          <Icon name="edit" />
+        </Button>
+        <Button onClick={onDelete} variant="link">
+          <Icon name="delete" />
+        </Button>
       </S.ActionsContainer>
     </S.InfoCardContainer>
   );

@@ -3,9 +3,4 @@ export type IconNames = "alert" | "delete" | "edit" | "visa" | "mastercard" |
 
 export interface IconProps {
   name: IconNames
-  onClick?: () => void
-}
-
-export interface ClicklabeIconProps {
-  clickable: boolean;
 }
