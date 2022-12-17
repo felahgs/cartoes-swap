@@ -43,7 +43,6 @@ module.exports = {
     ],
     "object-curly-spacing": [ "warn", "always" ],
     "array-bracket-spacing": [ "warn", "always" ], 
-    "computed-property-spacing": [ "warn", "always" ], 
     "import-helpers/order-imports": [
       "warn",
       { 
