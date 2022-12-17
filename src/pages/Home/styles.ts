@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-import { devices } from "utils/breakpoints";
-
-export const PageContainer = styled.main`
+export const HomeContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,56 +12,3 @@ export const PageContainer = styled.main`
   background: #F9FAFB;
 `;
 
-export const ListContainer = styled.div`
-  padding: 0 16px;
-  
-  @media ${devices.laptop} {
-    width: 860px;
-    margin-bottom: 40px;
-  }
-`;
-
-export const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-
-  padding: 36px 0;
-
-  h1 {
-    align-self: center;
-    color: #233876;
-    font-weight: 700;
-    font-size: 20px;
-    margin: 0;
-
-    @media ${devices.tablet} {
-      font-size: 24px;
-
-    }
-
-    @media ${devices.laptop} {
-      font-size: 36px;
-    }
-  }
-`;
-
-export const CardsContainer = styled.div`
-`;
-
-export const NoCards = styled.div`
-  text-align: center;
-  padding-top: 36px;
-
-  h2 {
-    font-weight: 700;
-    font-size: 24px;
-    color: #6B7280;
-  }
-
-  p {
-    font-weight: 400;
-    font-size: 16px;
-    color: #6B7280;
-  }
-`;
