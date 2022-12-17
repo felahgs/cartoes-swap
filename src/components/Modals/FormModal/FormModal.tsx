@@ -57,6 +57,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
 
   const [ cardSchema, fetchSchema ] = useAsyncFn(async () => {
     try {
+      console.log("calling fetch");
       const { cardNumber } = formValues;
       const response = await api.get(cardNumber);
       const result = response.data;
@@ -67,6 +68,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
 
       return result;
     } catch (err) {
+      console.log("error", err);
       setformValues({ ...formValues, scheme: "none" });
     }
   }, [ formValues ]);

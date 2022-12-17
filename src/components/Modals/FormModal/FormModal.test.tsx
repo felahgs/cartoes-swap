@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 
 import { formatCardNumber } from "utils/strings";
@@ -8,16 +8,20 @@ import FormModal from "./FormModal";
 jest.mock("axios");
 
 describe("FormModal", () => {
-  (axios.get as jest.Mock).mockResolvedValueOnce({
-    data: { result: { scheme: "none" } },
+  (axios.get as jest.Mock).mockResolvedValue({
+    data: { scheme: "master" },
   });
+
+  const setLocalStorage = (id: string, data: { [value: string]: string }[]) => {
+    localStorage.setItem(id, JSON.stringify(data));
+  };
 
   const onCloseMock = jest.fn();
   const mockedCard = {
-    id: "1",
+    id: "0",
     cardAlias: "Mocked Alias",
     cardHolder: "Mocked Holder Name",
-    cardNumber: "5555555555555555",
+    cardNumber: "333333333333333333",
     cvc: "555",
     expDate: "12/2022",
     scheme: "master",
@@ -98,21 +102,69 @@ describe("FormModal", () => {
     });
     fireEvent.change(cvcInput, { target: "invalid value" });
 
-    expect(cardNumberInput).toHaveDisplayValue(
-      formatCardNumber("23")
-    );
+    expect(cardNumberInput).toHaveDisplayValue(formatCardNumber("23"));
     expect(expirationDateInput).toHaveDisplayValue("12/2020");
     expect(cvcInput).toHaveDisplayValue("");
   });
 
-  it.only("should call localstorage when saving an edit", () => {
+  it("should be able to fill all the fields and save a new card on the localstorage", async () => {
+    render(<FormModal show={true} onClose={onCloseMock} />);
+    // get the reference for all the input fields
+    const cardAliasInput = screen.getByRole("textbox", { name: "card-alias" });
+    const cardholderInput = screen.getByRole("textbox", {
+      name: "card-holder",
+    });
+    const cardNumberInput = screen.getByRole("textbox", {
+      name: "card-number",
+    });
+    const expirationDateInput = screen.getByRole("textbox", {
+      name: "exp-date",
+    });
+    const cvcInput = screen.getByRole("textbox", { name: "cvc" });
+
+    // fill every input field with a value
+    fireEvent.change(cardAliasInput, {
+      target: { value: mockedCard.cardAlias },
+    });
+    fireEvent.change(cardholderInput, {
+      target: { value: mockedCard.cardHolder },
+    });
+    fireEvent.change(cardNumberInput, {
+      target: { value: mockedCard.cardNumber },
+    });
+    fireEvent.change(expirationDateInput, {
+      target: { value: mockedCard.expDate },
+    });
+    fireEvent.change(cvcInput, { target: { value: mockedCard.cvc } });
+
+    // assert all the filled inputs
+    expect(cardAliasInput).toHaveDisplayValue(mockedCard.cardAlias);
+    expect(cardholderInput).toHaveDisplayValue(mockedCard.cardHolder);
+    expect(cardNumberInput).toHaveDisplayValue(
+      formatCardNumber(mockedCard.cardNumber)
+    );
+    expect(expirationDateInput).toHaveDisplayValue(mockedCard.expDate);
+    expect(cvcInput).toHaveDisplayValue(mockedCard.cvc);
+
+    // submit form
+    const form = screen.getByRole("form", { hidden: true });
+    fireEvent.submit(form);
+
+    const addedCard = JSON.parse(localStorage.getItem("cards") as string)[0];
+
+    expect(addedCard.cardAlias).toBe(mockedCard.cardAlias);
+    expect(addedCard.cardHolder).toBe(mockedCard.cardHolder);
+    expect(addedCard.expDate).toBe(mockedCard.expDate);
+    expect(addedCard.cvc).toBe(mockedCard.cvc);
+  });
+
+  it("should call localstorage when saving an edit", () => {
     render(
       <FormModal show={true} editingCard={mockedCard} onClose={onCloseMock} />
     );
 
-    Storage.prototype.setItem = jest.fn(() => {
-      return 0;
-    });
+    setLocalStorage("cards", [ mockedCard ]);
+    // localStorage.setItem("cards", JSON.stringify([ mockedCard ]));
 
     expect(screen.getByText(/Edit Card/i)).toBeInTheDocument;
     expect(screen.findByText(/Mocked Alias/i)).toBeInTheDocument;
@@ -130,59 +182,35 @@ describe("FormModal", () => {
     fireEvent.submit(form);
     expect(form.checkValidity()).toBeTruthy();
 
-    expect(Storage.prototype.setItem).toHaveBeenCalled();
+    const editedCard = JSON.parse(localStorage.getItem("cards") as string)[0];
+
+    expect(editedCard.cardAlias).toBe(mockedCard.cardAlias);
   });
 
-  it("should be able to fill all the fields and successfully call setLocalstorage", async () => {
+  it("should call a verification request when entereinf a card numberk", async () => {
+    jest.useFakeTimers();
+
     render(<FormModal show={true} onClose={onCloseMock} />);
-
-    // mock localstorage.setItem with jest
-    Storage.prototype.setItem = jest.fn(() => {
-      return 0;
-    });
-
     // get the reference for all the input fields
-    const cardAliasInput = screen.getByRole("textbox", { name: "card-alias" });
-    const cardholderInput = screen.getByRole("textbox", {
-      name: "card-holder",
-    });
     const cardNumberInput = screen.getByRole("textbox", {
       name: "card-number",
     });
-    const expirationDateInput = screen.getByRole("textbox", {
-      name: "exp-date",
-    });
-    const cvcInput = screen.getByRole("textbox", { name: "cvc" });
 
-    // fill every input field with a value
-    fireEvent.change(cardAliasInput, {
-      target: { value: "some card alias for testing" },
-    });
-    fireEvent.change(cardholderInput, {
-      target: { value: mockedCard.cardHolder },
-    });
     fireEvent.change(cardNumberInput, {
       target: { value: mockedCard.cardNumber },
     });
-    fireEvent.change(expirationDateInput, {
-      target: { value: mockedCard.expDate },
-    });
-    fireEvent.change(cvcInput, { target: { value: mockedCard.cvc } });
 
-    // assert all the filled inputs
-    expect(cardAliasInput).toHaveDisplayValue("some card alias for testing");
-    expect(cardholderInput).toHaveDisplayValue(mockedCard.cardHolder);
+    jest.runAllTimers();
+
     expect(cardNumberInput).toHaveDisplayValue(
       formatCardNumber(mockedCard.cardNumber)
     );
-    expect(expirationDateInput).toHaveDisplayValue(mockedCard.expDate);
-    expect(cvcInput).toHaveDisplayValue(mockedCard.cvc);
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
 
-    // submit form
-    const form = screen.getByRole("form", { hidden: true });
-    fireEvent.submit(form);
+    jest.useRealTimers();
 
-    // localStorage.setItem() will be called if the form is valid
-    expect(Storage.prototype.setItem).toHaveBeenCalled();
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument()
+    );
   });
 });
