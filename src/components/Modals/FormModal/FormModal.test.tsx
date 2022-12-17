@@ -7,7 +7,6 @@ import FormModal from "./FormModal";
 
 jest.mock("axios");
 
-
 describe("FormModal", () => {
   (axios.get as jest.Mock).mockResolvedValueOnce({
     data: { result: { scheme: "none" } },
@@ -59,7 +58,7 @@ describe("FormModal", () => {
     expect(onCloseMock).toBeCalled();
   });
 
-  it("should show errors when trying to submit a empty form", () => {
+  it("should have the form invalid when not filling the fields", () => {
     render(<FormModal show={true} onClose={onCloseMock} />);
 
     const addCardBtn = screen.getByRole("button", { name: "Add card" });
@@ -75,15 +74,44 @@ describe("FormModal", () => {
     expect(
       screen.getByText(/Should have ate least 3 characters/i)
     ).toBeInTheDocument();
+
+    const form = screen.getByRole("form", { hidden: true }) as HTMLFormElement;
+    expect(form.checkValidity()).toBeFalsy();
   });
 
-  it("should call localstorage when saving an edit", () => {
+  it("shouldn't be possible to enter letters on number only inputs", () => {
+    render(<FormModal show={true} onClose={onCloseMock} />);
+
+    const cardNumberInput = screen.getByRole("textbox", {
+      name: "card-number",
+    });
+    const expirationDateInput = screen.getByRole("textbox", {
+      name: "exp-date",
+    });
+    const cvcInput = screen.getByRole("textbox", { name: "cvc" });
+
+    fireEvent.change(cardNumberInput, {
+      target: { value: "invalid value 23" },
+    });
+    fireEvent.change(expirationDateInput, {
+      target: { value: "invalid value 122020" },
+    });
+    fireEvent.change(cvcInput, { target: "invalid value" });
+
+    expect(cardNumberInput).toHaveDisplayValue(
+      formatCardNumber("23")
+    );
+    expect(expirationDateInput).toHaveDisplayValue("12/2020");
+    expect(cvcInput).toHaveDisplayValue("");
+  });
+
+  it.only("should call localstorage when saving an edit", () => {
     render(
       <FormModal show={true} editingCard={mockedCard} onClose={onCloseMock} />
     );
 
     Storage.prototype.setItem = jest.fn(() => {
-      console.log(" called store"); 
+      return 0;
     });
 
     expect(screen.getByText(/Edit Card/i)).toBeInTheDocument;
@@ -98,10 +126,11 @@ describe("FormModal", () => {
       target: { value: "Testing editing holder name" },
     });
 
-    const form = screen.getByRole("form", { hidden: true });
+    const form = screen.getByRole("form", { hidden: true }) as HTMLFormElement;
     fireEvent.submit(form);
+    expect(form.checkValidity()).toBeTruthy();
 
-    expect(Storage.prototype.setItem ).toHaveBeenCalled();
+    expect(Storage.prototype.setItem).toHaveBeenCalled();
   });
 
   it("should be able to fill all the fields and successfully call setLocalstorage", async () => {
@@ -109,35 +138,51 @@ describe("FormModal", () => {
 
     // mock localstorage.setItem with jest
     Storage.prototype.setItem = jest.fn(() => {
-      console.log(" called store"); 
+      return 0;
     });
-    
+
     // get the reference for all the input fields
     const cardAliasInput = screen.getByRole("textbox", { name: "card-alias" });
-    const cardholderInput = screen.getByRole("textbox", { name: "card-holder" });
-    const expirationDateInput = screen.getByRole("textbox", { name: "exp-date" });
+    const cardholderInput = screen.getByRole("textbox", {
+      name: "card-holder",
+    });
+    const cardNumberInput = screen.getByRole("textbox", {
+      name: "card-number",
+    });
+    const expirationDateInput = screen.getByRole("textbox", {
+      name: "exp-date",
+    });
     const cvcInput = screen.getByRole("textbox", { name: "cvc" });
-    const cardNumberInput = screen.getByRole("textbox", { name: "card-number" });
 
     // fill every input field with a value
-    fireEvent.change(cardAliasInput, { target: { value: "some card alias for testing" }, });
-    fireEvent.change(cardholderInput, { target: { value: mockedCard.cardHolder } });
-    fireEvent.change(expirationDateInput, { target: { value: mockedCard.expDate } });
-    fireEvent.change(cardNumberInput, { target: { value: mockedCard.cardNumber } });
+    fireEvent.change(cardAliasInput, {
+      target: { value: "some card alias for testing" },
+    });
+    fireEvent.change(cardholderInput, {
+      target: { value: mockedCard.cardHolder },
+    });
+    fireEvent.change(cardNumberInput, {
+      target: { value: mockedCard.cardNumber },
+    });
+    fireEvent.change(expirationDateInput, {
+      target: { value: mockedCard.expDate },
+    });
     fireEvent.change(cvcInput, { target: { value: mockedCard.cvc } });
 
     // assert all the filled inputs
     expect(cardAliasInput).toHaveDisplayValue("some card alias for testing");
     expect(cardholderInput).toHaveDisplayValue(mockedCard.cardHolder);
+    expect(cardNumberInput).toHaveDisplayValue(
+      formatCardNumber(mockedCard.cardNumber)
+    );
     expect(expirationDateInput).toHaveDisplayValue(mockedCard.expDate);
     expect(cvcInput).toHaveDisplayValue(mockedCard.cvc);
-    expect(cardNumberInput).toHaveDisplayValue(formatCardNumber(mockedCard.cardNumber));
 
     // submit form
     const form = screen.getByRole("form", { hidden: true });
     fireEvent.submit(form);
 
     // localStorage.setItem() will be called if the form is valid
-    expect(Storage.prototype.setItem ).toHaveBeenCalled();
+    expect(Storage.prototype.setItem).toHaveBeenCalled();
   });
 });

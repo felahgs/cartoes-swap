@@ -16,7 +16,7 @@ import * as T from "./types";
 
 
 
-function Home({ cards, setCards }: T.CardsListProps) {
+function CardsList({ cards, setCards }: T.CardsListProps) {
   const { CONFIRMATION_MODAL, FORM_MODAL } = modalNames;
   const [ activeModal, setActiveModal ] = useState<string>("");
   const [ editingCard, setEditingCard ] = useState<CardModel | null>(null);
@@ -24,9 +24,7 @@ function Home({ cards, setCards }: T.CardsListProps) {
 
   function handleCloseModal() {
     setActiveModal("");
-    setTimeout(() => {
-      setEditingCard(null);
-    }, 200);
+    setEditingCard(null);
   }
 
   function handleAddCard() {
@@ -90,4 +88,4 @@ function Home({ cards, setCards }: T.CardsListProps) {
   );
 }
 
-export default Home;
+export default CardsList;
