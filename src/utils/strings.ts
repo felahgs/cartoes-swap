@@ -21,7 +21,7 @@ export const formatCardNumber = (value: string | number) => {
   if (parts.length) {
     return parts.join(" ");
   } else {
-    return value;
+    return str;
   }
 };
 
@@ -46,6 +46,8 @@ export const formatExpirationDate = (value = "") => {
 
   return clearValue;
 };
+
+export const formatToNumberOnly = (value: string) => value.replace(/[^0-9]/gi, "");
 
 export const removeWhiteSpaces = (str: string) => {
   return str.trim().replace(/\s+/g, "");

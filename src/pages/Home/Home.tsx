@@ -24,8 +24,12 @@ function Home() {
   const [ cards, setCards ] = useLocalStorage<CardModel[]>(CARDS, []);
 
   function handleCloseModal() {
-    if(activeModal === modalNames.FORM_MODAL) setEditingCard(null);
     setActiveModal("");
+    if(activeModal === modalNames.FORM_MODAL) {
+      setTimeout(() => {
+        setEditingCard(null);
+      }, 200);
+    }
   }
 
   function handleAddCard() {

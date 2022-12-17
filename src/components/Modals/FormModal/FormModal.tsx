@@ -6,7 +6,6 @@ import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 
-
 import { localStorages } from "constants/storage";
 import { CardModel } from "models/card.model";
 import { v4 as uuidv4 } from "uuid";
@@ -25,6 +24,7 @@ import {
 import {
   formatCardNumber,
   formatExpirationDate,
+  formatToNumberOnly,
   toCamelCase,
   removeWhiteSpaces,
 } from "utils/strings";
@@ -53,7 +53,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
   const [ validated, setValidated ] = useState(false);
   const isEditing = !!editingCard;
 
-  const buttonLabel = isEditing ? "Edit card" : "Add card";
+  const buttonLabel = isEditing ? "Edit" : "Add card";
 
   const [ cardSchema, fetchSchema ] = useAsyncFn(async () => {
     try {
@@ -121,12 +121,16 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
   }
 
   function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target;
-    const formattedName = toCamelCase(name);
+    const { title, value } = event.target;
+    const formattedName = toCamelCase(title);
     let formattedValue = value;
 
     if (formattedName === "cardNumber") {
-      setIsTypingCardNumber(true);
+      if (formatToNumberOnly(formValues.cardNumber) 
+        !== formatToNumberOnly(value)) {
+        setIsTypingCardNumber(true);
+      }
+
       formattedValue = removeWhiteSpaces(value);
     }
 
@@ -139,8 +143,12 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
   }
 
   useLayoutEffect(() => {
-    editingCard && setformValues(editingCard);
-  }, [ editingCard, isEditing ]);
+    if (editingCard) {
+      setformValues(editingCard);
+    } else {
+      setformValues(defaultValues);
+    }
+  }, [ editingCard ]);
 
   return (
     <S.Modal show={show} onHide={handleClose} centered>
@@ -158,7 +166,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
             <S.FormLabel>Card Alias*</S.FormLabel>
             <S.Form.Control
               required
-              name="card-alias"
+              title="card-alias"
               type="text"
               maxLength={25}
               value={formValues.cardAlias}
@@ -174,7 +182,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
             <S.FormLabel>Card holder*</S.FormLabel>
             <S.Form.Control
               required
-              name="card-holder"
+              title="card-holder"
               type="text"
               pattern={cardHolderRgx}
               maxLength={25}
@@ -193,8 +201,8 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
             <S.FormLabel>Credit/debit card number*</S.FormLabel>
             <InputGroup hasValidation>
               <S.Form.Control
-                type="tel"
-                name="card-number"
+                type="numbers"
+                title="card-number"
                 inputMode="numeric"
                 autoComplete="cc-number"
                 required
@@ -215,7 +223,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
               <S.FormLabel>Expiration month and year*</S.FormLabel>
               <S.Form.Control
                 type="tel"
-                name="exp-date"
+                title="exp-date"
                 inputMode="numeric"
                 required
                 pattern={expDateRgx}
@@ -233,12 +241,12 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
               <S.FormLabel>CVC*</S.FormLabel>
               <S.Form.Control
                 type="tel"
-                name="cvc"
+                title="cvc"
                 inputMode="numeric"
                 required
                 pattern={cvcRgx}
                 maxLength={4}
-                value={formValues.cvc}
+                value={formatToNumberOnly(formValues.cvc)}
                 placeholder="CVC"
                 onChange={handleOnChange}
               />
