@@ -156,6 +156,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
       <S.ModalBody>
         <S.ModalTitle>{isEditing ? "Edit card" : "Add new Card"}</S.ModalTitle>
         <S.Form
+          aria-label="form"
           id="card-form"
           autoComplete="on"
           noValidate

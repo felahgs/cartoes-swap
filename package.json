@@ -6,6 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:all": "react-scripts test --watchAll",
     "test:cov": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "lint": "eslint .",
@@ -18,7 +19,8 @@
     "transformIgnorePatterns": ["node_modules/(?!@axios)/"],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/{styles,index,types}.{js,jsx,ts,tsx}",
+      "!src/**/{App,styles,index,types}.{js,jsx,ts,tsx}",
+      "!src/**/*.models.{ts,js}",
       "!src/**/*.d.ts",
       "!<rootDir>/node_modules/",
       "!<rootDir>/path/to/dir/"
