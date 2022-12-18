@@ -31,6 +31,9 @@ jobs:
       - name: Run tests
         run: npm run test:cov -- --watchAll=false
 
+      - name: Run audit
+        run: npm audit
+
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
         with:
