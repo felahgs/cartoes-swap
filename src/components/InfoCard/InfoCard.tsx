@@ -43,8 +43,6 @@ function InfoCard({
         </Button>
         <Button title="delete-card" onClick={onDelete} size="sm" variant="link">
           <Icon name="delete" />
-
-          
         </Button>
       </S.ActionsContainer>
     </S.InfoCardContainer>

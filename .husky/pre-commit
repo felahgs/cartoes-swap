@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo -en '\E[47;30m'"\033[1mChecking eslint errors\033[0m\n"
+yarn lint 
+
+echo -en '\n\E[47;32m'"\033[1mChecking prettier errors\033[0m\n" 
+yarn prettier
