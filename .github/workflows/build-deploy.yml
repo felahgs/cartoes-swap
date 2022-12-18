@@ -23,13 +23,13 @@ jobs:
           node-version: 16.x
 
       - name: Install NPM packages
-        run: npm ci
+        run: npm install
 
       - name: Build project
         run: npm run build
 
       - name: Run tests
-        run: npm run test:cov
+        run: npm run test:cov -- --watchAll=false
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
