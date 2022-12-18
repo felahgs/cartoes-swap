@@ -1,6 +1,7 @@
-// Bootstrap CSS
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { addParameters } from "@storybook/react";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-// Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
 export const parameters = {
@@ -12,3 +13,9 @@ export const parameters = {
     },
   },
 };
+
+addParameters({
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
+  },
+});
