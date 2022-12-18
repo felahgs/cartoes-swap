@@ -22,6 +22,14 @@ describe("formatExpirationDate", () => {
   it("should receive a number on format 121234 and return 12/1234", () => {
     expect(formatExpirationDate("122020")).toBe("12/2020");
   });
+
+  it("should not add the bar when the value is smaller than 3", () => {
+    expect(formatExpirationDate("12")).toBe("12");
+  });
+
+  it("should return a empty string if no value is passed", () => {
+    expect(formatExpirationDate()).toBe("");
+  });
 });
 
 describe("formatToNumberOnly", () => {

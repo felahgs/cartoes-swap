@@ -1,16 +1,21 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import axios from "axios";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
+import server from "mocks/server";
+import { rest } from "msw";
 
 import { formatCardNumber } from "utils/strings";
 
 import FormModal from "./FormModal";
 
-jest.mock("axios");
-
 describe("FormModal", () => {
-  (axios.get as jest.Mock).mockResolvedValue({
-    data: { scheme: "master" },
-  });
+  beforeAll(() => server.listen());
+  afterEach(() => server.resetHandlers());
+  afterAll(() => server.close());
 
   const setLocalStorage = (id: string, data: { [value: string]: string }[]) => {
     localStorage.setItem(id, JSON.stringify(data));
@@ -21,7 +26,7 @@ describe("FormModal", () => {
     id: "0",
     cardAlias: "Mocked Alias",
     cardHolder: "Mocked Holder Name",
-    cardNumber: "333333333333333333",
+    cardNumber: "5555555555555555",
     cvc: "555",
     expDate: "12/2022",
     scheme: "master",
@@ -109,6 +114,19 @@ describe("FormModal", () => {
 
   it("should be able to fill all the fields and save a new card on the localstorage", async () => {
     render(<FormModal show={true} onClose={onCloseMock} />);
+
+    server.use(
+      rest.get("https://lookup.binlist.net/5555555555555555", (req, res, ctx) => {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            number: {},
+            scheme: "mastercard",
+          })
+        );
+      })
+    );
+
     // get the reference for all the input fields
     const cardAliasInput = screen.getByRole("textbox", { name: "card-alias" });
     const cardholderInput = screen.getByRole("textbox", {
@@ -187,8 +205,20 @@ describe("FormModal", () => {
     expect(editedCard.cardAlias).toBe(mockedCard.cardAlias);
   });
 
-  it("should call a verification request when entereinf a card numberk", async () => {
+  it("should change the stat of the button to loading while confirming the card scheme", async () => {
     jest.useFakeTimers();
+
+    server.use(
+      rest.get("https://lookup.binlist.net/37443920915208", (req, res, ctx) => {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            number: {},
+            scheme: "mastercard",
+          })
+        );
+      })
+    );
 
     render(<FormModal show={true} onClose={onCloseMock} />);
     // get the reference for all the input fields
@@ -197,13 +227,15 @@ describe("FormModal", () => {
     });
 
     fireEvent.change(cardNumberInput, {
-      target: { value: mockedCard.cardNumber },
+      target: { value: "37443920915208" },
     });
 
-    jest.runAllTimers();
+    act(() => {
+      jest.runAllTimers();
+    });
 
     expect(cardNumberInput).toHaveDisplayValue(
-      formatCardNumber(mockedCard.cardNumber)
+      formatCardNumber("37443920915208")
     );
     expect(screen.getByText(/Loading/i)).toBeInTheDocument();
 

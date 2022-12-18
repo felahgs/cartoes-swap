@@ -24,7 +24,11 @@ function CardsList({ cards, setCards }: T.CardsListProps) {
 
   function handleCloseModal() {
     setActiveModal("");
-    setEditingCard(null);
+    // This timeout is purely for visual porposes so we don't se the form text changing while
+    // the modal fade away.
+    setTimeout(() => {
+      setEditingCard(null);
+    }, 200);
   }
 
   function handleAddCard() {
@@ -36,7 +40,7 @@ function CardsList({ cards, setCards }: T.CardsListProps) {
     const cardToEdit = cards?.find((card) => card.id === id);
     setActiveModal(FORM_MODAL);
 
-    return cardToEdit ? setEditingCard(cardToEdit) : null;
+    setEditingCard(cardToEdit as CardModel);
   }
 
   function handleCardDeleteAction(id: string) {

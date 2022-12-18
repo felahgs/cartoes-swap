@@ -4,7 +4,7 @@ export const toKebabCase = (str: string) => str
   .toLowerCase();
 
 export const toCamelCase = (str: string) => str.trim()
-  .replace(/[-_\s]+(.)?/g, (_, c) => c ? c.toUpperCase() : "");
+  .replace(/[-_\s]+(.)?/g, (_, c) => c.toUpperCase());
 
 export const formatCardNumber = (value: string | number) => {
   const str = value.toString()
@@ -42,9 +42,9 @@ export const formatExpirationDate = (value = "") => {
 
   if (clearValue.length >= 3) {
     return `${clearValue.slice(0, 2)}/${clearValue.slice(2, 6)}`;
+  } else {
+    return clearValue;
   }
-
-  return clearValue;
 };
 
 export const formatToNumberOnly = (value: string) => value.replace(/[^0-9]/gi, "");

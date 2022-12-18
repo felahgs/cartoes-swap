@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import CardsList from "./Cardslist";
 
@@ -59,6 +59,7 @@ describe("CardsList", () => {
 
   it("should be able to close a modal for creating a new card", async () => {
     render(<CardsList cards={mockedCards} setCards={setCardlistMocked} />);
+    jest.useFakeTimers();
 
     const newCardBtn = screen.getByRole("button", { name: "Add new card" });
     fireEvent.click(newCardBtn);
@@ -66,11 +67,18 @@ describe("CardsList", () => {
     const cancelBtn = screen.getByRole("button", { name: "cancel" });
     fireEvent.click(cancelBtn);
 
+    // Grant that the timeout for checking the screen will be concluded
+    act(() => {
+      jest.runAllTimers();
+    });
+
     await waitFor(() =>
       expect(
         screen.queryByRole("button", { name: "Add card" })
       ).not.toBeInTheDocument()
     );
+
+    jest.useRealTimers();
   });
 
   it("should be able to open a modal for editing a card", async () => {
