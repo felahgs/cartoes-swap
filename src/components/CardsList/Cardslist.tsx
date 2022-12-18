@@ -65,7 +65,7 @@ function CardsList({ cards, setCards }: T.CardsListProps) {
         onConfirm={handleOnConfirm}
       />
       <S.HeaderContainer>
-        <h1>My Cards</h1>
+        <h1>All Cards</h1>
         <Button onClick={handleAddCard}>Add new card</Button>
       </S.HeaderContainer>
       <S.CardsContainer>
