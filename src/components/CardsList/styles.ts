@@ -4,10 +4,12 @@ import { devices } from "utils/breakpoints";
 
 export const ListContainer = styled.div`
   padding: 0 16px;
+  width: 90%;
 
-  @media ${devices.laptop} {
+  @media ${devices.mobileL} {
     width: 860px;
     margin-bottom: 40px;
+    width: auto;
   }
 `;
 
