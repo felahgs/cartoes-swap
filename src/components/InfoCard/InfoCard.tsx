@@ -41,7 +41,7 @@ function InfoCard({
         <Button title="edit-card" onClick={onEdit} size="sm" variant="link">
           <Icon name="edit" />
         </Button>
-        <Button title="delete-card"onClick={onDelete} size="sm" variant="link">
+        <Button title="delete-card" onClick={onDelete} size="sm" variant="link">
           <Icon name="delete" />
         </Button>
       </S.ActionsContainer>

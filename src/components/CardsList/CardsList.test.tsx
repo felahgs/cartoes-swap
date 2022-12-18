@@ -1,4 +1,10 @@
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 
 import CardsList from "./Cardslist";
 
@@ -124,7 +130,7 @@ describe("CardsList", () => {
     const confirmBtn = screen.getByRole("button", { name: "Yes, I'm sure" });
     fireEvent.click(confirmBtn);
 
-    const updatedCards = mockedCards.filter(card => card.id !== "1");
+    const updatedCards = mockedCards.filter((card) => card.id !== "1");
     expect(setCardlistMocked).toHaveBeenCalledWith(updatedCards);
   });
 });

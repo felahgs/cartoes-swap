@@ -44,18 +44,18 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
   };
 
   const { CARDS } = localStorages;
-  const [ cardsStorage, setCardsStorage ] = useLocalStorage<CardModel[]>(
+  const [cardsStorage, setCardsStorage] = useLocalStorage<CardModel[]>(
     CARDS,
     []
   );
-  const [ isTypingCardNumber, setIsTypingCardNumber ] = useState(false);
-  const [ formValues, setformValues ] = useState(editingCard || defaultValues);
-  const [ validated, setValidated ] = useState(false);
+  const [isTypingCardNumber, setIsTypingCardNumber] = useState(false);
+  const [formValues, setformValues] = useState(editingCard || defaultValues);
+  const [validated, setValidated] = useState(false);
   const isEditing = !!editingCard;
 
   const buttonLabel = isEditing ? "Edit" : "Add card";
 
-  const [ cardSchema, fetchSchema ] = useAsyncFn(async () => {
+  const [cardSchema, fetchSchema] = useAsyncFn(async () => {
     try {
       const { cardNumber } = formValues;
       const response = await api.get(cardNumber);
@@ -69,9 +69,9 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
     } catch (err) {
       setformValues({ ...formValues, scheme: "none" });
     }
-  }, [ formValues ]);
+  }, [formValues]);
 
-  const [ , ] = useDebounce(
+  const [,] = useDebounce(
     () => {
       const { cardNumber } = formValues;
 
@@ -81,7 +81,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
       setIsTypingCardNumber(false);
     },
     1500,
-    [ formValues.cardNumber ]
+    [formValues.cardNumber]
   );
 
   const isLoading = cardSchema.loading || isTypingCardNumber;
@@ -90,8 +90,8 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
     const newCard = { ...formValues, id: uuidv4() };
 
     return cardsStorage
-      ? setCardsStorage([ ...cardsStorage, newCard ])
-      : setCardsStorage([ newCard ]);
+      ? setCardsStorage([...cardsStorage, newCard])
+      : setCardsStorage([newCard]);
   }
 
   function updateCard() {
@@ -126,15 +126,16 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
     let formattedValue = value;
 
     if (formattedName === "cardNumber") {
-      if (formatToNumberOnly(formValues.cardNumber) 
-        !== formatToNumberOnly(value)) {
+      if (
+        formatToNumberOnly(formValues.cardNumber) !== formatToNumberOnly(value)
+      ) {
         setIsTypingCardNumber(true);
       }
 
       formattedValue = removeWhiteSpaces(value);
     }
 
-    setformValues({ ...formValues, [ formattedName ]: formattedValue });
+    setformValues({ ...formValues, [formattedName]: formattedValue });
   }
 
   function handleClose() {
@@ -148,7 +149,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
     } else {
       setformValues(defaultValues);
     }
-  }, [ editingCard ]);
+  }, [editingCard]);
 
   return (
     <S.Modal show={show} onHide={handleClose} centered>

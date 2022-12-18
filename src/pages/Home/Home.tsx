@@ -10,11 +10,11 @@ import * as S from "./styles";
 const { CARDS } = localStorages;
 
 function Home() {
-  const [ cards, setCards ] = useLocalStorage<CardModel[]>(CARDS, []);
-  
+  const [cards, setCards] = useLocalStorage<CardModel[]>(CARDS, []);
+
   return (
     <S.HomeContainer>
-      <CardsList cards={cards} setCards={setCards}/>
+      <CardsList cards={cards} setCards={setCards} />
     </S.HomeContainer>
   );
 }

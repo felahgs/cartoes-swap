@@ -4,7 +4,7 @@ import { devices } from "utils/breakpoints";
 
 export const ListContainer = styled.div`
   padding: 0 16px;
-  
+
   @media ${devices.laptop} {
     width: 860px;
     margin-bottom: 40px;
@@ -27,7 +27,6 @@ export const HeaderContainer = styled.div`
 
     @media ${devices.tablet} {
       font-size: 24px;
-
     }
 
     @media ${devices.laptop} {
@@ -36,8 +35,7 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const CardsContainer = styled.div`
-`;
+export const CardsContainer = styled.div``;
 
 export const NoCards = styled.div`
   text-align: center;
@@ -46,12 +44,12 @@ export const NoCards = styled.div`
   h2 {
     font-weight: 700;
     font-size: 24px;
-    color: #6B7280;
+    color: #6b7280;
   }
 
   p {
     font-weight: 400;
     font-size: 16px;
-    color: #6B7280;
+    color: #6b7280;
   }
 `;

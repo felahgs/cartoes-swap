@@ -31,7 +31,8 @@ describe("ConfirmationModal", () => {
       />
     );
 
-    expect(screen.queryByText(/Are you sure about this?/i)).not.toBeInTheDocument;
+    expect(screen.queryByText(/Are you sure about this?/i)).not
+      .toBeInTheDocument;
   });
 
   it("should call onConfirmMock when clicking the confirm button", () => {

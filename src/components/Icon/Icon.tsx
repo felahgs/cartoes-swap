@@ -22,13 +22,13 @@ const iconList = {
   visa: visa,
   mastercard: mastercard,
   jcb: jcb,
-  alert: alert
+  alert: alert,
 };
 
 function Icon({ name }: T.IconProps) {
   return (
     <S.Icon title={name}>
-      <img src={iconList?.[ name ]} alt={name} />
+      <img src={iconList?.[name]} alt={name} />
     </S.Icon>
   );
 }

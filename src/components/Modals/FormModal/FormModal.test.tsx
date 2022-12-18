@@ -116,15 +116,18 @@ describe("FormModal", () => {
     render(<FormModal show={true} onClose={onCloseMock} />);
 
     server.use(
-      rest.get("https://lookup.binlist.net/5555555555555555", (req, res, ctx) => {
-        return res(
-          ctx.status(400),
-          ctx.json({
-            number: {},
-            scheme: "mastercard",
-          })
-        );
-      })
+      rest.get(
+        "https://lookup.binlist.net/5555555555555555",
+        (req, res, ctx) => {
+          return res(
+            ctx.status(400),
+            ctx.json({
+              number: {},
+              scheme: "mastercard",
+            })
+          );
+        }
+      )
     );
 
     // get the reference for all the input fields
@@ -181,7 +184,7 @@ describe("FormModal", () => {
       <FormModal show={true} editingCard={mockedCard} onClose={onCloseMock} />
     );
 
-    setLocalStorage("cards", [ mockedCard ]);
+    setLocalStorage("cards", [mockedCard]);
     // localStorage.setItem("cards", JSON.stringify([ mockedCard ]));
 
     expect(screen.getByText(/Edit Card/i)).toBeInTheDocument;

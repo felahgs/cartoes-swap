@@ -13,14 +13,11 @@ export { localStorages } from "constants/storage";
 import * as S from "./styles";
 import * as T from "./types";
 
-
-
-
 function CardsList({ cards, setCards }: T.CardsListProps) {
   const { CONFIRMATION_MODAL, FORM_MODAL } = modalNames;
-  const [ activeModal, setActiveModal ] = useState<string>("");
-  const [ editingCard, setEditingCard ] = useState<CardModel | null>(null);
-  const [ selectedCard, setSelectedCard ] = useState<string>("");
+  const [activeModal, setActiveModal] = useState<string>("");
+  const [editingCard, setEditingCard] = useState<CardModel | null>(null);
+  const [selectedCard, setSelectedCard] = useState<string>("");
 
   function handleCloseModal() {
     setActiveModal("");
@@ -56,7 +53,11 @@ function CardsList({ cards, setCards }: T.CardsListProps) {
 
   return (
     <S.ListContainer>
-      <FormModal editingCard={editingCard} show={activeModal === FORM_MODAL} onClose={handleCloseModal} />
+      <FormModal
+        editingCard={editingCard}
+        show={activeModal === FORM_MODAL}
+        onClose={handleCloseModal}
+      />
       <CofirmationModal
         message="Are you sure you want to delete this card?"
         show={activeModal === CONFIRMATION_MODAL}
@@ -65,9 +66,7 @@ function CardsList({ cards, setCards }: T.CardsListProps) {
       />
       <S.HeaderContainer>
         <h1>My Cards</h1>
-        <Button onClick={handleAddCard}>
-            Add new card
-        </Button>
+        <Button onClick={handleAddCard}>Add new card</Button>
       </S.HeaderContainer>
       <S.CardsContainer>
         {cards && cards.length > 0 ? (

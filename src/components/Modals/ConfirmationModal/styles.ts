@@ -3,17 +3,17 @@ import { Modal as BModal } from "react-bootstrap";
 import styled from "styled-components";
 
 export const Modal = styled(BModal)`
-  color: #6B7280;
+  color: #6b7280;
   font-size: 16px;
 
   .modal-content {
-      max-width: 416px;
-    }
+    max-width: 416px;
+  }
 `;
 
 export const ModalHeader = styled(BModal.Header)`
-    border: none;
-    padding: 22px 22px 0;
+  border: none;
+  padding: 22px 22px 0;
 `;
 
 export const ModalBody = styled(BModal.Body)`

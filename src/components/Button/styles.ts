@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const Button = styled(BSButton)`
   height: 37px;
   display: flex;
-align-items: center;
+  align-items: center;
   &.btn-primary {
     background-color: #233876;
     border-color: #233876;
@@ -14,17 +14,17 @@ align-items: center;
   }
 
   &.btn-outline-secondary {
-    color: #1F2A37;
+    color: #1f2a37;
   }
 
   &.btn-danger {
-    --bs-btn-bg: #F98080;
-    --bs-btn-border-color: #F98080;
+    --bs-btn-bg: #f98080;
+    --bs-btn-border-color: #f98080;
     --bs-btn-hover-bg: #b85f5f;
     --bs-btn-hover-border-color: #b85f5f;
     --bs-btn-active-bg: #b85f5f;
-    --bs-btn-disabled-bg: #F98080;
-    --bs-btn-disabled-border-color: #F98080;
+    --bs-btn-disabled-bg: #f98080;
+    --bs-btn-disabled-border-color: #f98080;
   }
 
   &.btn-primary:disabled {

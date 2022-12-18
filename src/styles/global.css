@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   position: relative;
   height: 100%;
 }
@@ -15,7 +16,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -23,15 +24,16 @@ code {
   background-image: none !important;
 }
 
-.invalid-feedback{
+.invalid-feedback {
   /* border-color: #F98080 !important; */
-  color: #F98080 !important;
+  color: #f98080 !important;
   /* background-image: none !important; */
 }
 
-.form-control.is-invalid, .was-validated .form-control:invalid {
-  border-color: #F98080 !important;
-  color: #F98080 !important;
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: #f98080 !important;
+  color: #f98080 !important;
 }
 
 input {

@@ -9,6 +9,5 @@ export const HomeContainer = styled.main`
   position: relative;
 
   padding: 30px 0;
-  background: #F9FAFB;
+  background: #f9fafb;
 `;
-

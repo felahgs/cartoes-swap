@@ -1,7 +1,7 @@
 import { IconNames } from "components/Icon";
 
 export interface InfoCardProps {
-  id: string
+  id: string;
   scheme: IconNames;
   cardAlias: string;
   cardHolder: string;

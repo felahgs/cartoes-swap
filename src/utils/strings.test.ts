@@ -14,7 +14,9 @@ describe("formatCardNumber", () => {
   });
 
   it("should remove any letter and add spaces", () => {
-    expect(formatCardNumber("a1000n2000c3000d4000")).toBe("1000 2000 3000 4000");
+    expect(formatCardNumber("a1000n2000c3000d4000")).toBe(
+      "1000 2000 3000 4000"
+    );
   });
 });
 

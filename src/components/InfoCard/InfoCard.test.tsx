@@ -3,7 +3,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import InfoCard from "./InfoCard";
 
 describe("InfoCard", () => {
-
   const mockedCard = {
     id: "test-id",
     scheme: "mocked-scheme",
@@ -15,7 +14,6 @@ describe("InfoCard", () => {
   };
   const onDeleteMock = jest.fn();
   const onEditMock = jest.fn();
-
 
   it("should render the component", () => {
     render(

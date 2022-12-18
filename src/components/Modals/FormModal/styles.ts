@@ -3,9 +3,7 @@ import BModal from "react-bootstrap/Modal";
 
 import styled from "styled-components";
 
-
-export const Form = styled(BForm)`
-`;
+export const Form = styled(BForm)``;
 
 export const FormGroup = styled(BForm.Group)`
   margin: 16px 0;
@@ -19,25 +17,25 @@ export const FormLabel = styled(BForm.Label)`
 
 export const FormLegend = styled.p`
   font-size: 12px;
-  color: #6B7280;
+  color: #6b7280;
 `;
 
 export const Modal = styled(BModal)`
   .modal-content {
-    max-width: 416px
+    max-width: 416px;
   }
 `;
 
 export const ModalTitle = styled(BModal.Title)`
-  color: #111C4E;
+  color: #111c4e;
 `;
 
-export const ModalHeader = styled(BModal.Header)`  
+export const ModalHeader = styled(BModal.Header)`
   border: none;
   padding: 24px 32px 0;
 `;
 
-export const ModalBody = styled(BModal.Body)`  
+export const ModalBody = styled(BModal.Body)`
   padding: 16px 32px;
 `;
 
