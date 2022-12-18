@@ -4,6 +4,6 @@ import Home from "./Home";
 
 test("renders Hello world", () => {
   render(<Home />);
-  const linkElement = screen.getByText(/My Cards/i);
-  expect(linkElement).toBeInTheDocument();
+  const text = screen.getAllByText(/My Cards/i);
+  expect(text[0]).toBeInTheDocument();
 });

@@ -28,6 +28,7 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/{App,styles,index,types,handlers}.{js,jsx,ts,tsx}",
+      "!src/**/*.stories.{ts,tsx}",
       "!src/**/*.model.{ts,js}",
       "!src/**/*.d.ts",
       "!<rootDir>/node_modules/",
