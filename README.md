@@ -10,10 +10,6 @@
     
    <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
 
-  
- <!--
-     <img alt="NextLevelWeek" title="#NextLevelWeek" src="./assets/banner.png" />
- -->
 </p>
 <h1 align="center">
   Desafio Front-End Swap
@@ -26,6 +22,7 @@
  <a href="#-layout">Layout</a> • 
  <a href="#-como-executar-o-projeto">Como executar</a> • 
  <a href="#-bibliotecas">Bibliotecas</a> • 
+ <a href="#-deploy">Deploy</a> • 
  <a href="#-scripts">Scripts</a> • 
 </p>
 
@@ -46,12 +43,12 @@ A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 ---
 ## ⚙️ Funcionalidades
 
-- [x] Gerenciamento de cartões por meio de local storage
-  - [x] Listar cartões cadastrados
-  - [x] Adicionar um novo cartão
+- Gerenciamento de cartões por meio de local storage
+  - Listar cartões cadastrados
+  - Adicionar um novo cartão
     - utilizando uma [api](https://lookup.binlist.net) para verificação da bandeira]
-  - [x] Editar cartões existentes
-  - [x] Excluir cartões
+  - Editar cartões existentes
+  - Excluir cartões
 
 ---
 
@@ -61,16 +58,16 @@ A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 ### Mobile
 
 <p align="center">
-  <img alt="Mobile" title="#Mobile" src="./publck/images/mobile_1.png" width="400px">
-  <img alt="Mobile" title="#Mobile" src="./public/images/mobile_.png" width="400px">
+  <img alt="Mobile" title="#Mobile" src="./public/images/mobile_1.png" width="300px">
+  <img alt="Mobile" title="#Mobile" src="./public/images/mobile_2.png" width="300px">
 
 </p>
 
 ### Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="Desktop" title="#Desktop" src="./publck/images/desktop_1.png" width="400px">
-  <img alt="Desktop" title="#Desktop" src="./public/images/desktop_2.png" width="400px">
+  <img alt="Desktop" title="#Desktop" src="./public/images/desktop_1.png" height="400px">
+  <img alt="Desktop" title="#Desktop" src="./public/images/desktop_2.png" height="400px">
 
 ---
 
@@ -139,7 +136,7 @@ As seguintes bibliotecas foram usadas na construção do projeto:
   
   ---
 
-## 🚀 Deployment
+## 🚀 Deploy
 
 O deploy da aplicação é feita de forma automatizada para https://felahgs.github.io/cartoes-swap por meio do [workflow](https://github.com/felahgs/cartoes-swap/blob/main/.github/workflows/build-deploy.yml) configurado no git hub actions.
 
