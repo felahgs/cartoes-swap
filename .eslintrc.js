@@ -18,6 +18,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
+  ignorePatterns: ["storybook-static"],
   plugins: ["react", "@typescript-eslint", "eslint-plugin-import-helpers"],
   rules: {
     indent: ["error", 2],

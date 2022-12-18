@@ -6,7 +6,7 @@ import {
   waitFor,
 } from "@testing-library/react";
 
-import CardsList from "./Cardslist";
+import CardsList from "./CardsList";
 
 const mockedCards = [
   {

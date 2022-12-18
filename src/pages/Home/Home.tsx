@@ -4,6 +4,7 @@ import { localStorages } from "constants/storage";
 import { CardModel } from "models/card.model";
 
 import { CardsList } from "components/CardsList";
+import { Navbar } from "components/Navbar";
 
 import * as S from "./styles";
 
@@ -13,9 +14,12 @@ function Home() {
   const [cards, setCards] = useLocalStorage<CardModel[]>(CARDS, []);
 
   return (
-    <S.HomeContainer>
-      <CardsList cards={cards} setCards={setCards} />
-    </S.HomeContainer>
+    <>
+      <Navbar />
+      <S.HomeContainer>
+        <CardsList cards={cards} setCards={setCards} />
+      </S.HomeContainer>
+    </>
   );
 }
 
