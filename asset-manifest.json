@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cd304373.css",
+    "main.js": "/static/js/main.7e592ebb.js",
+    "static/media/card-discover.svg": "/static/media/card-discover.77d78985f4272dee8c3b256c81b0fbd4.svg",
+    "static/media/card-amex.svg": "/static/media/card-amex.c32e586feab09577fe98275af0bb7391.svg",
+    "static/media/card-visa.svg": "/static/media/card-visa.52e0fb4539ffd3aabe4612d23b70114d.svg",
+    "static/media/card-master.svg": "/static/media/card-master.5e65c3a9ac47471c8cb57b9014a3bcba.svg",
+    "static/media/logo.svg": "/static/media/logo.a9118b2b96129312d6a0e40a68e9e363.svg",
+    "static/media/card-diners-club.svg": "/static/media/card-diners-club.68e0e04817418a319a1e4214874d8e5d.svg",
+    "static/media/card-jcb.svg": "/static/media/card-jcb.8bc9f8605f8550e37c7bccf57cbecd5b.svg",
+    "static/media/card-back.svg": "/static/media/card-back.dd16c66c4ce3ca2d96f07b37de56a92e.svg",
+    "static/media/trash.svg": "/static/media/trash.2f2a395465fd4ea377308ce2aa78e439.svg",
+    "index.html": "/index.html",
+    "static/media/edit.svg": "/static/media/edit.c0598144e834b59f06e0a273c40578d9.svg",
+    "static/media/alert.svg": "/static/media/alert.45888c337eb77e18a782cda44f7c56ff.svg",
+    "main.cd304373.css.map": "/static/css/main.cd304373.css.map",
+    "main.7e592ebb.js.map": "/static/js/main.7e592ebb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cd304373.css",
+    "static/js/main.7e592ebb.js"
+  ]
+}
