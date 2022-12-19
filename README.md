@@ -1,9 +1,7 @@
-
 <p align="left">
 
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/felahgs/cartoes-swap">
 
-  
   <a href="https://github.com/tgmarinho/README-ecoleta/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/felahgs/cartoes-swap">
   </a>
@@ -15,7 +13,6 @@
   Desafio Front-End Swap
 </h1>
 
-
 <p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
  <a href="#%EF%B8%8F-funcionalidades">Funcionalidades</a> •
@@ -25,7 +22,6 @@
  <a href="#-deploy">Deploy</a> • 
  <a href="#-scripts">Scripts</a> • 
 </p>
-
 
 ## 💻 Sobre o projeto
 
@@ -39,8 +35,8 @@ O projeto também possuí o [storybook](https://storybook.js.org/) configurado, 
 
 A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 
-
 ---
+
 ## ⚙️ Funcionalidades
 
 - Gerenciamento de cartões por meio de local storage
@@ -53,7 +49,6 @@ A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 ---
 
 ## 🎨 Layout
-
 
 ### Mobile
 
@@ -76,7 +71,7 @@ A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 ### Pré-requisitos
 
 Primeiro é necessário instalar as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/). 
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
 
 #### ▶️ Rodando a aplicação (servidor)
 
@@ -91,7 +86,7 @@ $ cd cartoes-swap
 # Instale as dependências
 $ npm install
 
-# Execute a aplicação 
+# Execute a aplicação
 $ npm start
 
 # A aplicação será aberta por padrão na porta:3000 - acesse http://localhost:3000
@@ -99,7 +94,7 @@ $ npm start
 
 #### 🧭 Rodando o storybook
 
-* Considerando que os dois primeiros passos da etapa anterior já foram realizados e já possuímos o repositório clonado e estamos no diretório do projeto.
+- Considerando que os dois primeiros passos da etapa anterior já foram realizados e já possuímos o repositório clonado e estamos no diretório do projeto.
 
 ```bash
 
@@ -130,18 +125,18 @@ As seguintes bibliotecas foram usadas na construção do projeto:
 - [React Bootstrap](https://react-bootstrap.github.io/) Foi utilizada a biblioteca de componenentes para criação de alguns componentes como base. Apesar disso, a biblioteca a aplicada de forma que a customização dos componentes seja simples, além de utiliza estilos próprios, sem depender das classes do bootstrap.
 - [Styled Components](https://styled-components.com/) Biblioteca de estilo utilizando css in js e possibilitando a criação de estilos isolados e bem customízaveis.
 - [React Use](https://www.npmjs.com/package/react-use) Uma biblioteca de hooks do react que facilitam a utilização de diversas funções, mantendo o código limpo e eficiente. Foram utilizadas as seguintes funções:
-  - [useAsyncFn](https://github.com/streamich/react-use/blob/HEAD/docs/useAsyncFn.md) hook para lidar com chamadas assincronas que disponibiliza estados praticos de erro e loading 
-  - [usDebounce](https://github.com/streamich/react-use/blob/HEAD/docs/useDebounce.md) hook para aplicar debouncer em um evento. No projeto, foi muito util para chamar a api de verificação de cartão após o usuário terminar de digita-lo. 
+
+  - [useAsyncFn](https://github.com/streamich/react-use/blob/HEAD/docs/useAsyncFn.md) hook para lidar com chamadas assincronas que disponibiliza estados praticos de erro e loading
+  - [usDebounce](https://github.com/streamich/react-use/blob/HEAD/docs/useDebounce.md) hook para aplicar debouncer em um evento. No projeto, foi muito util para chamar a api de verificação de cartão após o usuário terminar de digita-lo.
   - [useLocalStorage](https://github.com/streamich/react-use/blob/HEAD/docs/useLocalStorage.md) hook de acesso ao local storage que facilita o acesso e gravação no storage do browser, sem necessidade de aplicar conversão constante de string.
-  
-  ---
+
+  ***
 
 ## 🚀 Deploy
 
 O deploy da aplicação é feita de forma automatizada para https://felahgs.github.io/cartoes-swap por meio do [workflow](https://github.com/felahgs/cartoes-swap/blob/main/.github/workflows/build-deploy.yml) configurado no git hub actions.
 
 Para cada push realizado na branch main sera executado um pipeline, verificando a versão de cada pacote por meio do **audit** e conferindo se a cobertura de testes do código atinge o valor minimo necessário de 90%.
-
 
 ## 📜 Scripts
 
@@ -172,7 +167,7 @@ Os seguintes scripts estão configurados no projeto:
  <b>Felipe Souza</b></a>
  <br />
 
-[![Linkedin Badge](https://img.shields.io/badge/-Felipe-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/felipe-garcia-de-souza-aa9aa773/)](https://www.linkedin.com/in/felipe-garcia-de-souza-aa9aa773/) 
+[![Linkedin Badge](https://img.shields.io/badge/-Felipe-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/felipe-garcia-de-souza-aa9aa773/)](https://www.linkedin.com/in/felipe-garcia-de-souza-aa9aa773/)
 [![Gmail Badge](https://img.shields.io/badge/-fgsouza93@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:fgsouza93@gmail.com)](mailto:fgsouza93@gmail.com)
 
 ---
