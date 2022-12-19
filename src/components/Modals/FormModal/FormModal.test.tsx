@@ -79,7 +79,9 @@ describe("FormModal", () => {
       screen.getByText(/Insert a valid number between 14 and 16 digits!/i)
     ).toBeInTheDocument();
 
-    expect(screen.getByText(/Insert a valid date!/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Insert a valid date up to 2099/i)
+    ).toBeInTheDocument();
     expect(
       screen.getByText(/Should have ate least 3 characters/i)
     ).toBeInTheDocument();

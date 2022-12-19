@@ -234,7 +234,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
                 onChange={handleOnChange}
               />
               <S.Form.Control.Feedback type="invalid">
-                {"Insert a valid date!"}
+                {"Insert a valid date up to 2099"}
               </S.Form.Control.Feedback>
             </S.FormGroup>
 
