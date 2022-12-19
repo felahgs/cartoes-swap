@@ -99,7 +99,7 @@ export const SensibleDataContainer = styled.div`
   row-gap: 20px;
   justify-content: space-between;
 
-  @media ${devices.laptop} {
+  @media ${devices.tablet} {
     width: 50%;
     flex-direction: row;
   }
@@ -112,7 +112,7 @@ export const CodeContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-  @media ${devices.laptop} {
+  @media ${devices.tablet} {
     flex-direction: column;
     justify-content: flex-start;
   }

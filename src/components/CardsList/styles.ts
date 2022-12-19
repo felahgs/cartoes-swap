@@ -4,12 +4,16 @@ import { devices } from "utils/breakpoints";
 
 export const ListContainer = styled.div`
   padding: 0 16px;
-  width: 90%;
+  width: 100%;
 
-  @media ${devices.mobileL} {
+  @media ${devices.tablet} {
+    width: 90%;
+    margin-bottom: 40px;
+  }
+
+  @media ${devices.laptop} {
     width: 860px;
     margin-bottom: 40px;
-    width: auto;
   }
 `;
 
@@ -27,11 +31,11 @@ export const HeaderContainer = styled.div`
     font-size: 20px;
     margin: 0;
 
-    @media ${devices.tablet} {
+    @media ${devices.mobileL} {
       font-size: 24px;
     }
 
-    @media ${devices.laptop} {
+    @media ${devices.tablet} {
       font-size: 36px;
     }
   }
