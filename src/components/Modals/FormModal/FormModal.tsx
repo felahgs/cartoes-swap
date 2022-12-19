@@ -62,9 +62,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
       const response = await api.get(cardNumber);
       const result = response.data;
       const { scheme } = result;
-      result.scheme
-        ? setformValues({ ...formValues, scheme })
-        : setformValues({ ...formValues, scheme: "none" });
+      setformValues({ ...formValues, scheme });
 
       return result;
     } catch (err) {
@@ -90,15 +88,11 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
   function createCard() {
     const newCard = { ...formValues, id: uuidv4() };
 
-    return cardsStorage
-      ? setCardsStorage([...cardsStorage, newCard])
-      : setCardsStorage([newCard]);
+    setCardsStorage([...(cardsStorage as CardModel[]), newCard]);
   }
 
   function updateCard() {
-    if (!cardsStorage) return;
-
-    const updatedCardList = cardsStorage.map((card) =>
+    const updatedCardList = (cardsStorage as CardModel[]).map((card) =>
       card.id === formValues.id ? formValues : card
     );
 

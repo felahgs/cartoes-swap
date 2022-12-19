@@ -269,4 +269,66 @@ describe("FormModal", () => {
 
     expect(screen.getByAltText("none")).toBeInTheDocument();
   });
+
+  it("should change the card icon to the default value on a error return", async () => {
+    jest.useFakeTimers();
+
+    render(<FormModal show={true} onClose={onCloseMock} />);
+    // get the reference for all the input fields
+    const cardNumberInput = screen.getByRole("textbox", {
+      name: "card-number",
+    });
+
+    fireEvent.change(cardNumberInput, {
+      target: { value: "00000000000000" },
+    });
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(cardNumberInput).toHaveDisplayValue(
+      formatCardNumber("00000000000000")
+    );
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
+
+    jest.useRealTimers();
+
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument()
+    );
+
+    expect(screen.getByAltText("none")).toBeInTheDocument();
+  });
+
+  it("should't change the card icon if the typed card don't have the required length", async () => {
+    jest.useFakeTimers();
+
+    render(<FormModal show={true} onClose={onCloseMock} />);
+    // get the reference for all the input fields
+    const cardNumberInput = screen.getByRole("textbox", {
+      name: "card-number",
+    });
+
+    fireEvent.change(cardNumberInput, {
+      target: { value: "00000000000000" },
+    });
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(cardNumberInput).toHaveDisplayValue(
+      formatCardNumber("00000000000000")
+    );
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
+
+    jest.useRealTimers();
+
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument()
+    );
+
+    expect(screen.getByAltText("none")).toBeInTheDocument();
+  });
 });
