@@ -42,7 +42,7 @@ A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 - Gerenciamento de cartões por meio de local storage
   - Listar cartões cadastrados
   - Adicionar um novo cartão
-    - utilizando uma [api](https://lookup.binlist.net) para verificação da bandeira]
+    - utilizando uma [api](https://lookup.binlist.net) para verificação da bandeira
   - Editar cartões existentes
   - Excluir cartões
 
@@ -149,10 +149,11 @@ Os seguintes scripts estão configurados no projeto:
 - **test:all**: Realiza o comendo anterior mas realizando testes em toda a aplicação antes
 - **test:cov**: Realiza o mesmo comando que o anterior mas imprimindo o relatório de teste coverage em tela
 - **typecheck**: Verifica a tipagem de todo o código e imprime os arquivos que possuírem tipagem incorreta
-- **lint**: Realiza o teste de lint no projeto imprimindo os arquivos que apresentarem erro
-- **lint:fix**: corrige todos os erros possíveis de lint,
-- **prettier**: "Verifica o código em busca de erros de fromatação e estilo,
-- **prettier:fix**: Corrige todos os erros de formatação e estilo,
+- **lint**: Realiza o teste de lint no projeto imprimindo os arquivos que apresentarem erro de padrão de código
+- **lint:fix**: corrige todos os erros possíveis de padrão de código,
+- **prettier**: "Verifica o código em busca de erros de fromatação de código,
+- **prettier:fix**: Corrige todos os erros de formatação de código,
+- **format**: Executa list:fix e prettier:fix, corrigindo todos os erros possíveis de padrão e todos os erros de formatação de código
 - **prepare**: Inicia configuração de pre-hooks do husky,
 - **storybook**: inicia o storybook no endereço "http://localhost:6000",
 - **build-storybook**: Realiza o build do storybook para deploy
