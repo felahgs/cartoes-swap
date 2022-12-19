@@ -1,8 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo -en '\E[47;30m'"\033[1mChecking eslint errors\033[0m\n"
+echo "Check code formatting with eslint and prettier"
+echo '\e[1;44m'"\nValidating code patterns with eslint"'\e[0m'
 yarn lint 
 
-echo -en '\n\E[47;32m'"\033[1mChecking prettier errors\033[0m\n" 
+echo '\e[1;45m'"\nValidating code formatting with prettier"'\e[0m'
 yarn prettier
