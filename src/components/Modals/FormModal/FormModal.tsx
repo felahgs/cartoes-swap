@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { api } from "services/binlist";
 
 import { Button } from "components/Button";
+import { Icon, IconNames } from "components/Icon";
 
 import {
   cardHolder as cardHolderRgx,
@@ -40,7 +41,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
     cardNumber: "",
     expDate: "",
     cvc: "",
-    scheme: "none",
+    scheme: "none" as IconNames,
   };
 
   const { CARDS } = localStorages;
@@ -214,6 +215,9 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
                 placeholder="XXXX XXXX XXXX XXXX"
                 onChange={handleOnChange}
               />
+              <S.InputGroupText id="basic-addon1">
+                <Icon name={formValues.scheme as IconNames} />
+              </S.InputGroupText>
               <S.Form.Control.Feedback type="invalid">
                 {"Insert a valid number between 14 and 16 digits!"}
               </S.Form.Control.Feedback>

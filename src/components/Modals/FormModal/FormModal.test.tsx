@@ -208,20 +208,8 @@ describe("FormModal", () => {
     expect(editedCard.cardAlias).toBe(mockedCard.cardAlias);
   });
 
-  it("should change the stat of the button to loading while confirming the card scheme", async () => {
+  it("should change the card icon after entering a valid card", async () => {
     jest.useFakeTimers();
-
-    server.use(
-      rest.get("https://lookup.binlist.net/37443920915208", (req, res, ctx) => {
-        return res(
-          ctx.status(200),
-          ctx.json({
-            number: {},
-            scheme: "mastercard",
-          })
-        );
-      })
-    );
 
     render(<FormModal show={true} onClose={onCloseMock} />);
     // get the reference for all the input fields
@@ -247,5 +235,38 @@ describe("FormModal", () => {
     await waitFor(() =>
       expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument()
     );
+
+    expect(screen.getByAltText("mastercard")).toBeInTheDocument();
+  });
+
+  it("should change the card icon to the default value on a error return", async () => {
+    jest.useFakeTimers();
+
+    render(<FormModal show={true} onClose={onCloseMock} />);
+    // get the reference for all the input fields
+    const cardNumberInput = screen.getByRole("textbox", {
+      name: "card-number",
+    });
+
+    fireEvent.change(cardNumberInput, {
+      target: { value: "00000000000000" },
+    });
+
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    expect(cardNumberInput).toHaveDisplayValue(
+      formatCardNumber("00000000000000")
+    );
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
+
+    jest.useRealTimers();
+
+    await waitFor(() =>
+      expect(screen.queryByText(/Loading/i)).not.toBeInTheDocument()
+    );
+
+    expect(screen.getByAltText("none")).toBeInTheDocument();
   });
 });

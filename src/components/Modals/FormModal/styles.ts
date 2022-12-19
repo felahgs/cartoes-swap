@@ -1,7 +1,10 @@
+import { InputGroup as BInputGroup } from "react-bootstrap";
 import BForm from "react-bootstrap/Form";
 import BModal from "react-bootstrap/Modal";
 
 import styled from "styled-components";
+
+import { devices } from "utils/breakpoints";
 
 export const Form = styled(BForm)``;
 
@@ -18,6 +21,14 @@ export const FormLabel = styled(BForm.Label)`
 export const FormLegend = styled.p`
   font-size: 12px;
   color: #6b7280;
+`;
+
+export const InputGroupText = styled(BInputGroup.Text)`
+  display: none;
+
+  @media ${devices.mobileS} {
+    display: block;
+  }
 `;
 
 export const Modal = styled(BModal)`
