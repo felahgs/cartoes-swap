@@ -17,7 +17,7 @@
  <a href="#-sobre-o-projeto">Sobre</a> •
  <a href="#%EF%B8%8F-funcionalidades">Funcionalidades</a> •
  <a href="#-layout">Layout</a> • 
- <a href="#-como-executar-o-projeto">Como executar</a> • 
+ <a href="#-instalação-e-execução">Instalação</a> • 
  <a href="#-bibliotecas">Bibliotecas</a> • 
  <a href="#-deploy">Deploy</a> • 
  <a href="#-scripts">Scripts</a> • 
@@ -53,7 +53,7 @@ A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 ### Mobile
 
 <p align="center">
-  <img alt="Mobile" title="#Mobile" src="./public/images/mobile_1.png" width="300px">
+  <img alt="Mobile" title~="#Mobile" src="./public/images/mobile_1.png" width="300px">
   <img alt="Mobile" title="#Mobile" src="./public/images/mobile_2.png" width="300px">
 
 </p>
@@ -66,7 +66,7 @@ A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 
 ---
 
-## 🚗 Como executar o projeto
+## 🚗 Instalação e Execução
 
 ### Pré-requisitos
 
