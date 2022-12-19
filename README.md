@@ -71,7 +71,7 @@ A página funcional pode ser acessada em https://felahgs.github.io/cartoes-swap/
 ### Pré-requisitos
 
 Primeiro é necessário instalar as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable).
 
 #### ▶️ Rodando a aplicação (servidor)
 
@@ -84,10 +84,10 @@ $ git clone git@github.com:felahgs/cartoes-swap.git
 $ cd cartoes-swap
 
 # Instale as dependências
-$ npm install
+$ yarn install
 
 # Execute a aplicação
-$ npm start
+$ yarn start
 
 # A aplicação será aberta por padrão na porta:3000 - acesse http://localhost:3000
 ```
@@ -105,10 +105,10 @@ $ git clone git@github.com:felahgs/cartoes-swap.git
 $ cd cartoes-swap
 
 # Instale as dependências (caso ainda não tenha feito para rodar a aplicação)
-$ npm install
+$ yarn install
 
 # Execute a aplicação em modo de desenvolvimento
-$ npm run storybook
+$ yarn run storybook
 
 # A aplicação será aberta por padrão na porta:6006 - acesse http://localhost:6006/
 
@@ -140,7 +140,7 @@ Para cada push realizado na branch main sera executado um pipeline, verificando 
 
 ## 📜 Scripts
 
-Os scripts podem ser excutados por meio do comando `npm run [nome do script]`
+Os scripts podem ser excutados por meio do comando `yarn [nome do script]`
 Os seguintes scripts estão configurados no projeto:
 
 - **start**: Inicia a aplicação no endereço "http://localhost:3000"
