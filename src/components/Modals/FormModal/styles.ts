@@ -56,3 +56,7 @@ export const ModalFooter = styled(BModal.Footer)`
   margin-bottom: 20px;
   padding: 24px 32px 16px;
 `;
+
+export const LoadingMessage = styled.p`
+  padding-left: 8px;
+`;

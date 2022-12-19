@@ -77,6 +77,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
       if (cardNumber.match(cardNumberRgx)) {
         fetchSchema();
       }
+      setformValues({ ...formValues, scheme: "none" });
       setIsTypingCardNumber(false);
     },
     1500,
@@ -276,7 +277,7 @@ function FormModal({ show, onClose, editingCard }: T.FormModalProps) {
                 role="status"
                 aria-hidden="true"
               />
-              {" Loading..."}
+              <S.LoadingMessage>{" Loading..."}</S.LoadingMessage>
             </>
           ) : (
             buttonLabel
