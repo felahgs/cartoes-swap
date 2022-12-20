@@ -12,7 +12,7 @@ export default {
 
 export const Edit: StoryObj<IconProps> = { args: { name: "edit" } };
 export const Delete: StoryObj<IconProps> = { args: { name: "delete" } };
-export const Alert: StoryObj<IconProps> = { args: { name: "delete" } };
+export const Alert: StoryObj<IconProps> = { args: { name: "alert" } };
 export const Discover: StoryObj<IconProps> = { args: { name: "discover" } };
 export const None: StoryObj<IconProps> = { args: { name: "none" } };
 export const Master: StoryObj<IconProps> = { args: { name: "mastercard" } };

@@ -11,16 +11,21 @@ export default {
     variant: "primary",
   },
   argTypes: {
-    variant: [
-      "primary",
-      "secondary",
-      "outline-primary",
-      "outline-secondary",
-      "link",
-      "danger",
-    ],
     size: {
       options: ["sm", "default", "lg"],
+      control: {
+        type: "inline-radio",
+      },
+    },
+    variant: {
+      options: [
+        "primary",
+        "secondary",
+        "outline-primary",
+        "outline-secondary",
+        "link",
+        "danger",
+      ],
       control: {
         type: "inline-radio",
       },

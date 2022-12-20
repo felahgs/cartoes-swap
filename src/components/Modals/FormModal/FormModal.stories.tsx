@@ -9,16 +9,17 @@ const mockedCard = cards[0];
 export default {
   title: "Components/Modals/FormModal",
   component: FormModal,
+  controls: { disable: true },
   args: {
     editingCard: null,
     show: true,
   },
   argTypes: {
     show: { control: "boolean" },
-  },
-  parameters: {
-    docs: {
-      page: null,
+    editingCard: {
+      table: {
+        disable: true,
+      },
     },
   },
 } as Meta<FormModalProps>;
