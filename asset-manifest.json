@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cartoes-swap/static/css/main.cd304373.css",
-    "main.js": "/cartoes-swap/static/js/main.85e59a29.js",
+    "main.js": "/cartoes-swap/static/js/main.0a4ec4bd.js",
     "static/media/card-discover.svg": "/cartoes-swap/static/media/card-discover.77d78985f4272dee8c3b256c81b0fbd4.svg",
     "static/media/card-amex.svg": "/cartoes-swap/static/media/card-amex.c32e586feab09577fe98275af0bb7391.svg",
     "static/media/card-visa.svg": "/cartoes-swap/static/media/card-visa.52e0fb4539ffd3aabe4612d23b70114d.svg",
@@ -15,10 +15,10 @@
     "static/media/edit.svg": "/cartoes-swap/static/media/edit.c0598144e834b59f06e0a273c40578d9.svg",
     "static/media/alert.svg": "/cartoes-swap/static/media/alert.45888c337eb77e18a782cda44f7c56ff.svg",
     "main.cd304373.css.map": "/cartoes-swap/static/css/main.cd304373.css.map",
-    "main.85e59a29.js.map": "/cartoes-swap/static/js/main.85e59a29.js.map"
+    "main.0a4ec4bd.js.map": "/cartoes-swap/static/js/main.0a4ec4bd.js.map"
   },
   "entrypoints": [
     "static/css/main.cd304373.css",
-    "static/js/main.85e59a29.js"
+    "static/js/main.0a4ec4bd.js"
   ]
 }
