@@ -21,7 +21,7 @@ function CardsList({ cards, setCards }: T.CardsListProps) {
 
   function handleCloseModal() {
     setActiveModal("");
-    // This timeout is purely for visual porposes so we don't se the form text changing while
+    // This timeout is purely for visual purposes so we don't se the form text changing while
     // the modal fade away.
     setTimeout(() => {
       setEditingCard(null);
@@ -65,7 +65,7 @@ function CardsList({ cards, setCards }: T.CardsListProps) {
         onConfirm={handleOnConfirm}
       />
       <S.HeaderContainer>
-        <h1>My Cards</h1>
+        <h1>All Cards</h1>
         <Button onClick={handleAddCard}>Add new card</Button>
       </S.HeaderContainer>
       <S.CardsContainer>
