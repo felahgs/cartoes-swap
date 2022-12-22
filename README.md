@@ -124,6 +124,7 @@ As seguintes bibliotecas foram usadas na construção do projeto:
 - [Mock Service Worker](https://mswjs.io/) O MSW é um Request handler que possibilita mockar chamadas com apis externas e foi utilizado para o teste da api dos cartões no projeto.
 - [React Bootstrap](https://react-bootstrap.github.io/) Foi utilizada a biblioteca de componenentes para criação de alguns componentes como base. Apesar disso, a biblioteca a aplicada de forma que a customização dos componentes seja simples, além de utiliza estilos próprios, sem depender das classes do bootstrap.
 - [Styled Components](https://styled-components.com/) Biblioteca de estilo utilizando css in js e possibilitando a criação de estilos isolados e bem customízaveis.
+- [uuid](https://www.npmjs.com/package/uuid) Gerador de ids unicos usado na criação de cada cartão salvo no local storage.
 - [React Use](https://www.npmjs.com/package/react-use) Uma biblioteca de hooks do react que facilitam a utilização de diversas funções, mantendo o código limpo e eficiente. Foram utilizadas as seguintes funções:
 
   - [useAsyncFn](https://github.com/streamich/react-use/blob/HEAD/docs/useAsyncFn.md) hook para lidar com chamadas assincronas que disponibiliza estados praticos de erro e loading
