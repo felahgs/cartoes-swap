@@ -20,7 +20,7 @@
  <a href="#-instalação-e-execução">Instalação</a> • 
  <a href="#-bibliotecas">Bibliotecas</a> • 
  <a href="#-deploy">Deploy</a> • 
- <a href="#-scripts">Scripts</a> • 
+ <a href="#-scripts">Scripts</a> 
 </p>
 
 ## 💻 Sobre o projeto
