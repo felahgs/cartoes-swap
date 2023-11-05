@@ -3,7 +3,7 @@ name: Hello World on PR to Development
 on:
   pull_request:
     branches:
-      - development
+      - main
 
 jobs:
   build:
